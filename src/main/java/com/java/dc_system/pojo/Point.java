@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class Point {
     private Integer pointid;
 
-    private String ponintname;
+    private String pointname;
 }
