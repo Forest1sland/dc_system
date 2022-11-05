@@ -1,6 +1,6 @@
 package com.java.dc_system.pojo.vo;
 
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 import lombok.Data;
 
 /**

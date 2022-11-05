@@ -1,6 +1,6 @@
 package com.java.dc_system.Exception;
 
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 
 /**
  * @Author: zjt

@@ -2,7 +2,7 @@ package com.java.dc_system.Exception;
 
 
 import com.java.dc_system.pojo.vo.ResultModel;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
