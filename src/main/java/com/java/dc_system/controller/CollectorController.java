@@ -28,7 +28,7 @@ public class CollectorController {
     private ICollectorService collectorService;
     @PostMapping("/registerCollector.do")
     public ResultModel<Integer> registerCollector(@RequestBody Collector model) throws BusinessException {
-        Collector collector = collectorService.loginCollector(model.getIdCard(),model.getTel(),null);
+        List<Collector> collector = collectorService.loginCollector(model.getIdCard(),model.getTel(),null);
         if (collector == null){
             Integer num =  collectorService.registerCollector(model);
             return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
@@ -38,8 +38,8 @@ public class CollectorController {
 
     }
     @PostMapping("/loginCollector.do")
-    public ResultModel<Collector> loginCollector(String tel,String password) throws BusinessException {
-        Collector result =  collectorService.loginCollector(null,tel,password);
+    public ResultModel<List<Collector>> loginCollector(String tel,String password) throws BusinessException {
+        List<Collector> result =  collectorService.loginCollector(null,tel,password);
         return new ResultModel<>(CodeEnum.SUCCESS, "登录成功", result, true);
     }
     @PostMapping("/getCollectorById.do")
