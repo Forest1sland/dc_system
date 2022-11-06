@@ -29,7 +29,7 @@ public class CollectorController {
     @PostMapping("/registerCollector.do")
     public ResultModel<Integer> registerCollector(@RequestBody Collector model) throws BusinessException {
         List<Collector> collector = collectorService.loginCollector(model.getIdCard(),model.getTel(),null);
-        if (collector == null){
+        if (collector.size() == 0){
             Integer num =  collectorService.registerCollector(model);
             return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
         }else {
