@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: zjt
@@ -31,4 +32,6 @@ public class TestTube {
     private Date openTime;
     //封管时间
     private Date closeTime;
+    //转运箱集合
+    private Box box;
 }

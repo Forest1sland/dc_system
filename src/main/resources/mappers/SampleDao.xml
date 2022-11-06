@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.java.dc_system.dao.SampleDao">
+<!--    <resultMap id="selectSample" type="Sample">-->
+<!--        <id property="sampleId" column="sampleId"/>-->
+<!--        <result property="peopleId" column="peopleId"/>-->
+<!--        <result property="testTubeId" column="testTubeId"/>-->
+<!--        <result property="collectTime" column="collectTime"/>-->
+
+<!--        <result property="people.peopleId" column="peopleId"/>-->
+<!--        <result property="people.idCard" column="idCard"/>-->
+<!--        <result property="people.idCardType" column="idCardType"/>-->
+<!--        <result property="people.createTime" column="createTime"/>-->
+<!--        <result property="people.name" column="name"/>-->
+<!--        <result property="people.tel" column=""/>-->
+
+<!--        <result property="testTube.testTubeId" column=""/>-->
+<!--        <result property="testTube.boxId" column=""/>-->
+<!--        <result property="testTube.closeTime" column=""/>-->
+<!--        <result property="testTube.collectType" column=""/>-->
+<!--        <result property="testTube.openTime" column=""/>-->
+<!--        <result property="testTube.status" column=""/>-->
+<!--        <result property="testTube.testTubeCode" column=""/>-->
+<!--        <result property="testTube.testResult" column=""/>-->
+
+<!--        <result property="testTube.box.status" column=""/>-->
+<!--        <result property="testTube.box.openTime" column=""/>-->
+<!--        <result property="testTube.box.closeTime" column=""/>-->
+<!--        <result property="testTube.box.boxId" column=""/>-->
+<!--        <result property="testTube.box.boxCode" column=""/>-->
+<!--        <result property="testTube.box.collectorId" column=""/>-->
+<!--        <result property="testTube.box.pointId" column=""/>-->
+<!--        <result property="testTube.box.testerId" column=""/>-->
+<!--        <result property="testTube.box.testOrganizationId" column=""/>-->
+<!--        <result property="testTube.box.transferId" column=""/>-->
+<!--    </resultMap>-->
+    <select id="selectInfoUnderSample" resultMap="selectSample" parameterType="Sample">
+        select * from sample
+        left join people on sample.peopleId = people.peopleId
+        left join testtube on sample.testTubeId = testtube.testTubeId
+        where sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
+    </select>
     <!--检索样本数据-->
-    <select id="selectSample" resultType="com.java.dc_system.pojo.Sample">
+    <select id="selectSample" resultType="Sample">
         select * from sample
         <where>
             <trim suffixOverrides="or|and">
@@ -23,7 +62,7 @@
     </select>
     <!--添加样本数据-->
     <insert id="insertSample" parameterType="Sample" useGeneratedKeys="true" keyProperty="sampleId">
-        insert into sample values (null ,#{sampleId} ,#{peopleId} ,#{testTubeId} ,#{collectTime})
+        insert into sample values (null  ,#{peopleId} ,#{testTubeId} ,#{collectTime})
     </insert>
     <!--检索样本中试管数量-->
     <select id="checkSampleTestTubeId" resultType="Integer">
