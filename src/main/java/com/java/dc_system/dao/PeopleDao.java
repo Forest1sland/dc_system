@@ -26,5 +26,5 @@ public interface PeopleDao {
     //被检测人员登录
     People loginPeople(@Param("idCard")String idCard,@Param("tel")String tel);
     //校验被检测人员的注册信息
-    People checkPeople(@Param("idCard")String idCard,@Param("tel")String tel);
+    List<People> checkPeople(@Param("idCard")String idCard,@Param("tel")String tel);
 }

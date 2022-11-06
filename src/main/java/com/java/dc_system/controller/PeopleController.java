@@ -32,13 +32,17 @@ public class PeopleController {
     }
 
     @PostMapping("/registerPeople.do")
-    public ResultModel<Integer> registerPeople(@RequestBody People model) throws BusinessException {
-        People people = peopleService.checkPeople(model.getIdCard(), model.getTel());
-        if (people == null){
+    public ResultModel<Object> registerPeople(@RequestBody People model) throws BusinessException {
+        List<People> people = peopleService.checkPeople(model.getIdCard(), model.getTel());
+        if (people.size() == 0){
             int num = peopleService.registerPeople(model);
-            return new ResultModel<>(CodeEnum.SUCCESS, "成功添加被检测人员信息", num, true);
+            if(num !=0){
+                return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
+            }else {
+                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, false);
+            }
         }else {
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "成功添加被检测人员失败", 0, true);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", "您已经已注册", false);
         }
 
     }
