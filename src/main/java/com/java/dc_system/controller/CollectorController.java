@@ -31,9 +31,14 @@ public class CollectorController {
         List<Collector> collector = collectorService.loginCollector(model.getIdCard(),model.getTel(),null);
         if (collector.size() == 0){
             Integer num =  collectorService.registerCollector(model);
-            return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
+            if (num !=0){
+                return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, false);
+            }
+            else {
+                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, true);
+            }
         }else {
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", 0, true);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "已经注册", collector.size(), false);
         }
 
     }
