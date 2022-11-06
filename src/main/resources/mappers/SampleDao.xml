@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.dc_system.dao.SampleDao">
+    <!--检索样本数据-->
+    <select id="selectSample" resultType="com.java.dc_system.pojo.Sample">
+        select * from sample
+        <where>
+            <trim suffixOverrides="or|and">
+                <if test="sampleId != null">
+                    sampleId = #{sampleId} or
+                </if>
+                <if test="peopleId != null">
+                    peopleId = #{peopleId} or
+                </if>
+                <if test="testTubeId != null">
+                    testTubeId = #{testTubeId} or
+                </if>
+                <if test="collectTime != null">
+                    collectTime = #{collectTime}
+                </if>
+            </trim>
+        </where>
+    </select>
+    <!--添加样本数据-->
+    <insert id="insertSample" parameterType="Sample" useGeneratedKeys="true" keyProperty="sampleId">
+        insert into sample values (null ,#{sampleId} ,#{peopleId} ,#{testTubeId} ,#{collectTime})
+    </insert>
+    <!--检索样本中试管数量-->
+    <select id="checkSampleTestTubeId" resultType="Integer">
+        select count(#{testTubeId}) from sample
+    </select>
+</mapper>

@@ -38,25 +38,29 @@ public class CollectorController {
 
     }
     @PostMapping("/loginCollector.do")
-    public ResultModel<List<Collector>> loginCollector(String tel,String password) throws BusinessException {
-        List<Collector> result =  collectorService.loginCollector(null,tel,password);
+    public ResultModel<List<Collector>> loginCollector(@RequestBody Collector collector) throws BusinessException {
+        List<Collector> result =  collectorService.loginCollector(null,collector.getTel(), collector.getPassword());
         return new ResultModel<>(CodeEnum.SUCCESS, "登录成功", result, true);
     }
+
     @PostMapping("/getCollectorById.do")
     public ResultModel<Collector> getCollectorById(Integer collectorId) throws BusinessException {
         Collector result =  collectorService.getCollectorById(collectorId);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息检索成功", result, true);
     }
+
     @PostMapping("/deleteCollector.do")
     public ResultModel<Integer> deleteCollector(Integer collectorId) throws BusinessException {
         Integer num =  collectorService.deleteCollector(collectorId);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息删除成功", num, true);
     }
+
     @PostMapping("/updateCollector.do")
     public ResultModel<Integer> updateCollector(@RequestBody Collector model) throws BusinessException {
         Integer num =  collectorService.updateCollector(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息更新成功", num, true);
     }
+
     @PostMapping("/getAllCollector.do")
     public ResultModel<List<Collector>> getAllCollector() throws BusinessException {
         List<Collector> result =  collectorService.getAllCollector();

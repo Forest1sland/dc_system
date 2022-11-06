@@ -32,11 +32,17 @@ public class CollectorServiceImpl implements ICollectorService {
 
     @Override
     public List<Collector> loginCollector(String idCard, String tel, String password) throws BusinessException {
-        List<Collector> collector = collectorDao.loginCollector(idCard ,tel ,password);
-        if (collector!=null){
+        List<Collector> collector;
+        if (password != null){
+            collector = collectorDao.loginCollector(idCard ,tel ,password);
+            if (collector.size() != 0){
+                return collector;
+            }else {
+                throw new BusinessException("检测人员已经注册",CodeEnum.LOGIN_FAILED);
+            }
+        }else{
+            collector = collectorDao.loginCollector(idCard ,tel , null);
             return collector;
-        }else {
-            throw new BusinessException("登录失败",CodeEnum.LOGIN_FAILED);
         }
     }
 
