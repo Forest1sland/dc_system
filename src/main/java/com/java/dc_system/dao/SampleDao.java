@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface SampleDao {
     //查询样本数据
     List<Sample> selectSample(Sample sample);
     //添加样本数据
-
+    int insertSample(Sample sample);
+    //试管人数校验
+    Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTube);
 }

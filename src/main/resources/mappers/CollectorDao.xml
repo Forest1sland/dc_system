@@ -9,14 +9,14 @@
     </insert>
     <!--检测人员登录-->
     <!--也是通过检验 检测人员是否注册过-->
-    <select id="loginCollector" resultType="Collector">
+    <select id="loginCollector" resultType="Collector" parameterType="Collector">
         select * from collector
         <where>
             <if test="idCard != null and idCard != ''">
-                 idCard = #{idCard}
+                 idCard = #{idCard} or
             </if>
             <if test="tel != null and tel != ''">
-                or tel = #{tel}
+                tel = #{tel}
             </if>
             <if test="password != null and password != ''">
                 and  password =#{password}
