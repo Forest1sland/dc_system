@@ -11,123 +11,153 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 02/11/2022 21:08:45
+ Date: 07/11/2022 10:52:57
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for case
+-- Table structure for box
 -- ----------------------------
-DROP TABLE IF EXISTS `case`;
-CREATE TABLE `case`  (
-  `caseId` int(11) NOT NULL COMMENT '转运箱号',
-  `openDate` datetime NOT NULL COMMENT '开箱日期',
-  `caseState` int(2) NOT NULL DEFAULT 0 COMMENT '转运箱状态 开箱0封箱1正在运输2检测中3检测完成4',
-  PRIMARY KEY (`caseId`) USING BTREE,
-  INDEX `caseId`(`caseId`) USING BTREE,
-  INDEX `caseId_2`(`caseId`) USING BTREE,
-  INDEX `caseId_3`(`caseId`) USING BTREE,
-  INDEX `caseId_4`(`caseId`) USING BTREE,
-  INDEX `caseId_5`(`caseId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '转运箱表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of case
--- ----------------------------
+DROP TABLE IF EXISTS `box`;
+CREATE TABLE `box`  (
+  `boxId` int(11) NOT NULL AUTO_INCREMENT,
+  `boxCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `collectorId` int(11) NOT NULL,
+  `transferId` int(11) NULL DEFAULT NULL,
+  `testerId` int(11) NULL DEFAULT NULL,
+  `pointId` int(11) NOT NULL,
+  `testOrganiationId` int(11) NULL DEFAULT NULL,
+  `openTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  `closeTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`boxId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for collector
 -- ----------------------------
 DROP TABLE IF EXISTS `collector`;
 CREATE TABLE `collector`  (
-  `collectorId` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '采集人员姓名',
-  `idNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '采集人员身份证',
-  `phoneNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '采集人员手机号',
-  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '采集人员地区代码',
-  PRIMARY KEY (`collectorId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '采集人员表' ROW_FORMAT = Dynamic;
+  `collectorId` int(11) NOT NULL AUTO_INCREMENT COMMENT '采集人员号',
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `organizationId` int(11) NULL DEFAULT NULL,
+  `idCard` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `registerTime` date NULL DEFAULT NULL,
+  PRIMARY KEY (`collectorId`) USING BTREE,
+  INDEX `foreignkey01`(`organizationId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of collector
+-- Table structure for manager
 -- ----------------------------
+DROP TABLE IF EXISTS `manager`;
+CREATE TABLE `manager`  (
+  `managerId` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idcard` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `registerTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`managerId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for person
+-- Table structure for organization
 -- ----------------------------
-DROP TABLE IF EXISTS `person`;
-CREATE TABLE `person`  (
-  `personId` int(11) NOT NULL COMMENT '被采集人员识别码',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '被采集人员姓名',
-  `idNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '被采集人员身份证',
-  `phoneNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '被采集人员手机号',
-  PRIMARY KEY (`personId`) USING BTREE,
-  INDEX `personId`(`personId`) USING BTREE,
-  INDEX `personId_2`(`personId`) USING BTREE,
-  INDEX `personId_3`(`personId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '被采集人员表' ROW_FORMAT = Dynamic;
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE `organization`  (
+  `organizationId` int(11) NOT NULL AUTO_INCREMENT,
+  `organizationName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`organizationId`) USING BTREE,
+  INDEX `organizationId`(`organizationId`) USING BTREE,
+  INDEX `organizationId_2`(`organizationId`) USING BTREE,
+  INDEX `organizationId_3`(`organizationId`) USING BTREE,
+  INDEX `organizationId_4`(`organizationId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of person
+-- Table structure for people
 -- ----------------------------
+DROP TABLE IF EXISTS `people`;
+CREATE TABLE `people`  (
+  `peopleId` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idCardType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idCard` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `createTime` datetime(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`peopleId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for result
+-- Table structure for point
 -- ----------------------------
-DROP TABLE IF EXISTS `result`;
-CREATE TABLE `result`  (
-  `tubeId` int(11) NOT NULL COMMENT '试管码',
-  `resState` int(1) NOT NULL DEFAULT 0 COMMENT '试管检测状态 未检测0阴性1阳性2',
-  PRIMARY KEY (`tubeId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '核酸结果表' ROW_FORMAT = Dynamic;
+DROP TABLE IF EXISTS `point`;
+CREATE TABLE `point`  (
+  `pointId` int(11) NOT NULL AUTO_INCREMENT COMMENT '采集点号',
+  `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '采集点名',
+  PRIMARY KEY (`pointId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of result
+-- Table structure for sample
 -- ----------------------------
+DROP TABLE IF EXISTS `sample`;
+CREATE TABLE `sample`  (
+  `sampleId` int(11) NOT NULL AUTO_INCREMENT,
+  `people` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `testtubeId` int(11) NOT NULL,
+  `collectTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`sampleId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for tube
+-- Table structure for tester
 -- ----------------------------
-DROP TABLE IF EXISTS `tube`;
-CREATE TABLE `tube`  (
-  `tubeId` int(11) NOT NULL COMMENT '试管号',
-  `openDate` datetime NOT NULL COMMENT '开管日期',
-  `tubeState` int(1) NOT NULL DEFAULT 0 COMMENT '试管状态 开管0封管1未检测2已检测3',
-  `caseId` int(11) NOT NULL COMMENT '所属转运箱',
-  PRIMARY KEY (`tubeId`) USING BTREE,
-  INDEX `tubeId`(`tubeId`) USING BTREE,
-  INDEX `tubeId_2`(`tubeId`) USING BTREE,
-  INDEX `tubeId_3`(`tubeId`) USING BTREE,
-  INDEX `tubeId_4`(`tubeId`) USING BTREE,
-  INDEX `tubeId_5`(`tubeId`) USING BTREE,
-  INDEX `tubeId_6`(`tubeId`) USING BTREE,
-  INDEX `tubeId_7`(`tubeId`) USING BTREE,
-  INDEX `tubeId_8`(`tubeId`) USING BTREE,
-  INDEX `tubeId_9`(`tubeId`) USING BTREE,
-  INDEX `tubeId_10`(`tubeId`) USING BTREE,
-  INDEX `tubeId_11`(`tubeId`) USING BTREE,
-  INDEX `tubeId_12`(`tubeId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '试管表' ROW_FORMAT = Dynamic;
+DROP TABLE IF EXISTS `tester`;
+CREATE TABLE `tester`  (
+  `testerId` int(11) NOT NULL AUTO_INCREMENT,
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idcard` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `organizationId` int(11) NOT NULL,
+  `registerTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`testerId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tube
+-- Table structure for testtube
 -- ----------------------------
+DROP TABLE IF EXISTS `testtube`;
+CREATE TABLE `testtube`  (
+  `testtubeId` int(11) NOT NULL AUTO_INCREMENT,
+  `testtubeCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `boxId` int(11) NOT NULL,
+  `collectType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `testResult` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `openTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  `closeTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`testtubeId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for tube_person_relation
+-- Table structure for transfer
 -- ----------------------------
-DROP TABLE IF EXISTS `tube_person_relation`;
-CREATE TABLE `tube_person_relation`  (
-  `tubeId` int(11) NOT NULL COMMENT '试管号',
-  `personId` int(11) NOT NULL COMMENT '被采集人员识别码',
-  PRIMARY KEY (`tubeId`) USING BTREE,
-  INDEX `personId`(`personId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '试管人员表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tube_person_relation
--- ----------------------------
+DROP TABLE IF EXISTS `transfer`;
+CREATE TABLE `transfer`  (
+  `transferId` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `idCard` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `registerTime` datetime(6) NOT NULL ON UPDATE CURRENT_TIMESTAMP(6),
+  PRIMARY KEY (`transferId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
