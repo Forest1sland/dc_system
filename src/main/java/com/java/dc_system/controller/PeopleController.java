@@ -62,6 +62,12 @@ public class PeopleController {
     @PostMapping("/loginPeople.do")
     public ResultModel<People> loginPeople(String idCard,String tel) throws BusinessException {
         People people = peopleService.loginPeople(idCard, tel);
-        return new ResultModel<>(CodeEnum.SUCCESS,"成功更新检测人员信息",people,true);
+        return new ResultModel<>(CodeEnum.SUCCESS,"成功更新被检测人员信息",people,true);
+    }
+
+    @PostMapping("/getOnePeople.do")
+    public ResultModel<People> getOnePeople(@RequestBody People model) throws BusinessException {
+        People people = peopleService.getOnePeople(model);
+        return new ResultModel<>(CodeEnum.SUCCESS,"检索到被检测人员信息",people,true);
     }
 }
