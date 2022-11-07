@@ -3,7 +3,7 @@ package com.java.dc_system.controller;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ITestTubeService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
