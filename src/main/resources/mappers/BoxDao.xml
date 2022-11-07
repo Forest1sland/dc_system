@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.java.dc_system.dao.BoxDao">
-    <sql id="insertBoxs">
+    <sql id="insertBox">
         <trim prefix="(" suffix=")" suffixOverrides=",">
             boxId,
             <if test="boxCode != null and boxCode != ''">
@@ -132,7 +132,7 @@
     <!--添加转运箱信息(开箱)-->
     <insert id="insertBox" parameterType="Box" useGeneratedKeys="true" keyProperty="boxId">
         insert into box
-        <include refid="insertBoxs"/>
+        <include refid="insertBox"/>
     </insert>
     <!--更新转运箱信息(封箱)-->
     <update id="updateBox" parameterType="Box">
