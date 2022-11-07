@@ -3,7 +3,7 @@ package com.java.dc_system.controller;
 import com.java.dc_system.pojo.Sample;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ISampleService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

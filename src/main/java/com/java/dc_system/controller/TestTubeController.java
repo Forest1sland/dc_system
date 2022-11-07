@@ -41,5 +41,4 @@ public class TestTubeController {
         int num = testTubeService.updateTestTube(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "封管成功", num, true);
     }
-
 }

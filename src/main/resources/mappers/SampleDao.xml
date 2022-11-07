@@ -55,7 +55,7 @@
                     testTubeId = #{testTubeId} or
                 </if>
                 <if test="collectTime != null">
-                    collectTime = #{collectTime}
+                    collectTime = NOW()
                 </if>
             </trim>
         </where>

@@ -48,7 +48,7 @@
                 #{transferId},
             </if>
             <if test="testerId">
-               #{testerId},
+                #{testerId},
             </if>
             <if test="pointId != null">
                 #{pointId},
@@ -57,10 +57,10 @@
                 #{testOrganizationId},
             </if>
             <if test="openTime != null">
-               #{openTime},
+                #{openTime},
             </if>
             <if test="closeTime != null">
-               #{closeTime},
+                #{closeTime},
             </if>
         </trim>
     </sql>
@@ -88,7 +88,7 @@
                 testOrganizationId = #{testOrganizationId},
             </if>
             <if test="openTime != null">
-                openTime = #{openTime},
+                openTime = NOW(),
             </if>
             <if test="closeTime != null">
                 closeTime = #{closeTime},
@@ -96,36 +96,37 @@
         </trim>
     </sql>
     <sql id="getBox">
-        <trim prefix="where "  suffixOverrides="and | or">
+        <trim prefix="where " suffixOverrides="and | or">
             <if test="boxId != null">
-                boxId = #{boxId} or
+                boxId = #{boxId}
+                   or
             </if>
             <if test="boxCode != null and boxCode != ''">
-                boxCode = #{boxCode} and
+                    boxCode = #{boxCode} and
             </if>
             <if test="status != null">
-                status = #{status} and
+                    status = #{status} and
             </if>
             <if test="collectorId != null">
-                collectorId = #{collectorId} and
+                    collectorId = #{collectorId} and
             </if>
             <if test="transferId != null">
-                transferId = #{transferId} and
+                    transferId = #{transferId} and
             </if>
             <if test="testerId">
-                testerId = #{testerId} and
+                    testerId = #{testerId} and
             </if>
             <if test="pointId != null">
-                pointId = #{pointId} and
+                    pointId = #{pointId} and
             </if>
             <if test="testOrganizationId != null">
-                testOrganizationId = #{testOrganizationId} and
+                    testOrganizationId = #{testOrganizationId} and
             </if>
             <if test="openTime != null">
-                openTime = #{openTime} and
+                    openTime = #{openTime} and
             </if>
             <if test="closeTime != null">
-                closeTime = #{closeTime}
+                    closeTime = #{closeTime}
             </if>
         </trim>
     </sql>
@@ -148,7 +149,8 @@
     </update>
     <!--获取转运箱信息(查看转运箱信息)-->
     <select id="getBox" resultType="Box">
-        select * from box
+        select *
+        from box
         <include refid="getBox"/>
     </select>
 </mapper>

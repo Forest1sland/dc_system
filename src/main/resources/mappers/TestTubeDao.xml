@@ -46,7 +46,7 @@
                 testResult = #{testResult},
             </if>
             <if test="openTime != null">
-                openTime = #{openTime},
+                openTime = now(),
             </if>
             <if test="closeTime != null">
                 closeTime = #{closeTime},
