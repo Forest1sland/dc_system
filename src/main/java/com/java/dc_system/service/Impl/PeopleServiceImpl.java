@@ -25,7 +25,7 @@ public class PeopleServiceImpl implements IPeopleService {
         if (peopleList != null){
             return peopleList;
         } else{
-            throw new BusinessException("检索被检测人员信息失败", CodeEnum.BUSINESS_ERROR);
+            throw new BusinessException("没有获取到被检测人员信息", CodeEnum.BUSINESS_ERROR);
         }
     }
 
@@ -35,7 +35,7 @@ public class PeopleServiceImpl implements IPeopleService {
         if (people != null){
             return people;
         } else{
-            throw new BusinessException("没有获取到检测人员信息", CodeEnum.BUSINESS_ERROR);
+            throw new BusinessException("没有获取到被检测人员信息", CodeEnum.BUSINESS_ERROR);
         }
     }
 

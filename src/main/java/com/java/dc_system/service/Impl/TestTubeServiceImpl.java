@@ -1,8 +1,10 @@
 package com.java.dc_system.service.Impl;
 
+import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.dao.TestTubeDao;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.service.ITestTubeService;
+import com.java.dc_system.until.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +20,13 @@ public class TestTubeServiceImpl implements ITestTubeService {
     @Autowired
     private TestTubeDao testTubeDao;
     @Override
-    public int insertTestTube(TestTube testTube) {
-        return testTubeDao.insertTestTube(testTube);
+    public int insertTestTube(TestTube testTube) throws BusinessException {
+        int num = testTubeDao.insertTestTube(testTube);
+        if (num != 0){
+            return num;
+        } else{
+            throw new BusinessException("被检测人员信息没有注册", CodeEnum.BUSINESS_ERROR);
+        }
     }
 
     @Override
