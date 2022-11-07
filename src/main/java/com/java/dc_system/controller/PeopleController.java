@@ -23,7 +23,9 @@ import java.util.List;
 public class PeopleController {
     @Autowired
     private IPeopleService peopleService;
+
     /**
+     *
      */
     @PostMapping("/getAllPeople.do")
     public ResultModel<List<People>> getAllPeople() throws BusinessException {
@@ -34,14 +36,14 @@ public class PeopleController {
     @PostMapping("/registerPeople.do")
     public ResultModel<Object> registerPeople(@RequestBody People model) throws BusinessException {
         List<People> people = peopleService.checkPeople(model.getIdCard(), model.getTel());
-        if (people.size() == 0){
+        if (people.size() == 0) {
             int num = peopleService.registerPeople(model);
-            if(num !=0){
+            if (num != 0) {
                 return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
-            }else {
+            } else {
                 return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, false);
             }
-        }else {
+        } else {
             return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", "您已经已注册", false);
         }
 
@@ -50,18 +52,24 @@ public class PeopleController {
     @PostMapping("/updatePeople.do")
     public ResultModel<Integer> updatePeople(@RequestBody People model) throws BusinessException {
         int num = peopleService.updatePeople(model);
-        return new ResultModel<>(CodeEnum.SUCCESS,"成功更新检测人员信息",num,true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "成功更新检测人员信息", num, true);
     }
 
     @PostMapping("/deletePeople.do")
     public ResultModel<Integer> deletePeople(Integer peopleId) throws BusinessException {
         int num = peopleService.deletePeople(peopleId);
-        return new ResultModel<>(CodeEnum.SUCCESS,"成功删除被检测人员信息",num,true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "成功删除被检测人员信息", num, true);
     }
 
     @PostMapping("/loginPeople.do")
-    public ResultModel<People> loginPeople(String idCard,String tel) throws BusinessException {
+    public ResultModel<People> loginPeople(String idCard, String tel) throws BusinessException {
         People people = peopleService.loginPeople(idCard, tel);
-        return new ResultModel<>(CodeEnum.SUCCESS,"成功更新检测人员信息",people,true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "成功更新检测人员信息", people, true);
+    }
+
+    @PostMapping("/getPeopleById")
+    public ResultModel<People> getPeopleById(@RequestBody People model) throws BusinessException {
+        People people = peopleService.getOnePeople(model);
+        return new ResultModel<>(CodeEnum.SUCCESS, "成功查询到身份信息", people, true);
     }
 }

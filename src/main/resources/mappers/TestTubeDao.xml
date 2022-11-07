@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.java.dc_system.dao.TestTubeDao">
-
     <sql id="insertTestTube">
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            testtubeId,
+            <if test="testTubeCode != null and testTubeCode != ''">
+                testTubeCode,
+            </if>
+            <if test="boxId != null">
+                boxId,
+            </if>
+            <if test="collectType != null">
+                collectType,
+            </if>
+            <if test="status != null">
+                0,
+            </if>
+            <if test="testResult != null">
+                testResult,
+            </if>
+            <if test="openTime != null">
+                now(),
+            </if>
+            <if test="closeTime != null">
+                closeTime,
+            </if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             null ,
-           <if test="testTubeCode != null and testTubeCode != ''">
-               #{testTubeCode},
-           </if>
+            <if test="testTubeCode != null and testTubeCode != ''">
+                #{testTubeCode},
+            </if>
             <if test="boxId != null">
                 #{boxId},
             </if>
@@ -61,9 +84,10 @@
 
     <!--检索试管信息-->
     <select id="selectTestTube" resultType="TestTube">
-        select * from testtube
+        select *
+        from testtube
         <where>
-            <trim  prefixOverrides="or">
+            <trim prefixOverrides="or">
                 <if test="testTubeId != null">
                     testTubeId = #{testTubeId}
                 </if>
@@ -83,6 +107,7 @@
     </update>
     <!--查询试管数量-->
     <select id="checkTestTube" resultType="integer">
-        select count(testTubeId) from testtube
+        select count(testTubeId)
+        from testtube
     </select>
 </mapper>
