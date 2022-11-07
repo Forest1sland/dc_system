@@ -2,6 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.java.dc_system.dao.BoxDao">
     <sql id="insertBox">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            boxId,
+            <if test="boxCode != null and boxCode != ''">
+                boxCode,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="collectorId != null">
+                collectorId,
+            </if>
+            <if test="transferId != null">
+                transferId,
+            </if>
+            <if test="testerId">
+                testerId,
+            </if>
+            <if test="pointId != null">
+                pointId,
+            </if>
+            <if test="testOrganizationId != null">
+                testOrganizationId,
+            </if>
+            <if test="openTime != null">
+                openTime,
+            </if>
+            <if test="closeTime != null">
+                closeTime
+            </if>
+        </trim>
+
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             null ,
             <if test="boxCode != null and boxCode != ''">
