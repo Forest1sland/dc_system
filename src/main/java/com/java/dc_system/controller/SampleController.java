@@ -41,4 +41,10 @@ public class SampleController {
         int num = sampleService.checkSampleTestTubeId(sample.getTestTubeId());
         return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量" ,num , true);
     }
+
+    @PostMapping("/selectInfoUnderSample.do")
+    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample){
+        List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
+        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息" ,sampleList , true);
+    }
 }

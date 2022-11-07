@@ -32,4 +32,9 @@ public class SampleServiceImpl implements ISampleService {
     public Integer checkSampleTestTubeId(Integer testTube) {
         return sampleDao.checkSampleTestTubeId(testTube);
     }
+
+    @Override
+    public List<Sample> selectInfoUnderSample(Integer testTubeId) {
+        return sampleDao.selectInfoUnderSample(testTubeId);
+    }
 }

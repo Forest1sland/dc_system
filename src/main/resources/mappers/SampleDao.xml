@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ResultMapColumnCheck -->
 <mapper namespace="com.java.dc_system.dao.SampleDao">
     <resultMap id="selectSample" type="Sample">
+        <!--主表sample-->
         <id property="sampleId" column="sampleId"/>
         <result property="peopleId" column="peopleId"/>
         <result property="testTubeId" column="testTubeId"/>
         <result property="collectTime" column="collectTime"/>
-
+        <!--副表people-->
         <result property="people.peopleId" column="peopleId"/>
         <result property="people.idCard" column="idCard"/>
         <result property="people.idCardType" column="idCardType"/>
         <result property="people.createTime" column="createTime"/>
         <result property="people.name" column="name"/>
-        <result property="people.tel" column=""/>
-
-        <result property="testTube.testTubeId" column=""/>
-        <result property="testTube.boxId" column=""/>
-        <result property="testTube.closeTime" column=""/>
-        <result property="testTube.collectType" column=""/>
-        <result property="testTube.openTime" column=""/>
-        <result property="testTube.status" column=""/>
-        <result property="testTube.testTubeCode" column=""/>
-        <result property="testTube.testResult" column=""/>
-
-        <result property="testTube.box.status" column=""/>
-        <result property="testTube.box.openTime" column=""/>
-        <result property="testTube.box.closeTime" column=""/>
-        <result property="testTube.box.boxId" column=""/>
-        <result property="testTube.box.boxCode" column=""/>
-        <result property="testTube.box.collectorId" column=""/>
-        <result property="testTube.box.pointId" column=""/>
-        <result property="testTube.box.testerId" column=""/>
-        <result property="testTube.box.testOrganizationId" column=""/>
-        <result property="testTube.box.transferId" column=""/>
+        <result property="people.tel" column="tel"/>
+        <!--副表testTube-->
+        <result property="testTube.testTubeId" column="testTubeId"/>
+        <result property="testTube.boxId" column="boxId"/>
+        <result property="testTube.closeTime" column="closeTime"/>
+        <result property="testTube.collectType" column="collectType"/>
+        <result property="testTube.openTime" column="openTime"/>
+        <result property="testTube.status" column="status"/>
+        <result property="testTube.testTubeCode" column="testTubeCode"/>
+        <result property="testTube.testResult" column="testResult"/>
+        <!--副表box-->
+        <result property="testTube.box.status" column="status"/>
+        <result property="testTube.box.openTime" column="openTime"/>
+        <result property="testTube.box.closeTime" column="closeTime"/>
+        <result property="testTube.box.boxId" column="boxId"/>
+        <result property="testTube.box.boxCode" column="boxCode"/>
+        <result property="testTube.box.collectorId" column="collectorId"/>
+        <result property="testTube.box.pointId" column="pointId"/>
+        <result property="testTube.box.testerId" column="testerId"/>
+        <result property="testTube.box.testOrganizationId" column="testOrganizationId"/>
+        <result property="testTube.box.transferId" column="transferId"/>
     </resultMap>
     <select id="selectInfoUnderSample" resultMap="selectSample" parameterType="Sample">
-        select * from sample
+        select sample.*,people.*,testtube.*,box.* from sample
         left join people on sample.peopleId = people.peopleId
         left join testtube on sample.testTubeId = testtube.testTubeId
-        where sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
+        left join box on box.boxId = testtube.boxId
+        where sample.testTubeId = #{testTubeId} and
+        sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
     </select>
     <!--检索样本数据-->
     <select id="selectSample" resultType="Sample">
@@ -66,6 +70,6 @@
     </insert>
     <!--检索样本中试管数量-->
     <select id="checkSampleTestTubeId" resultType="Integer">
-        select count(#{testTubeId}) from sample
+        select count(*) from sample where testTubeId = #{testTubeId}
     </select>
 </mapper>

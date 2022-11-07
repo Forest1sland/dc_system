@@ -17,4 +17,6 @@ public interface ISampleService {
     int insertSample(Sample sample);
     //试管人数校验
     Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTube);
+    //该试管下的被检测人员信息
+    List<Sample> selectInfoUnderSample(@Param("testTubeId") Integer testTubeId);
 }
