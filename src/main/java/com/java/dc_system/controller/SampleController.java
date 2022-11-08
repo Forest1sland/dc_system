@@ -48,8 +48,14 @@ public class SampleController {
         return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息", sampleList, true);
     }
 
+    /**
+     * 通过人员ID删除一条信息
+     *
+     * @param model
+     * @return 结果
+     */
     @PostMapping("/deleteOneByPeopleId")
-    public ResultModel<Integer> deleteOneByPeopleId(@RequestBody People model) {
+    public ResultModel<Integer> deleteOneByPeopleId(@RequestBody Sample model) {
         Integer res = sampleService.deleteOneByPeopleId(model.getPeopleId());
         return new ResultModel<>(CodeEnum.SUCCESS, "已删除该条信息", res, true);
     }
