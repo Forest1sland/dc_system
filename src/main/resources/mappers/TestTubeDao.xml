@@ -3,7 +3,7 @@
 <mapper namespace="com.java.dc_system.dao.TestTubeDao">
     <sql id="insertTestTube">
         <trim prefix=" (" suffix=")" suffixOverrides=",">
-            testtubeId,
+            testTubeId,
             <if test="testTubeCode != null and testTubeCode != ''">
                 testTubeCode,
             </if>
