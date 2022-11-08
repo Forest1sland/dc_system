@@ -1,5 +1,6 @@
 package com.java.dc_system.controller;
 
+import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ITestTubeService;
@@ -25,7 +26,7 @@ public class TestTubeController {
     private ITestTubeService testTubeService;
     //开管
     @PostMapping("/insertTestTube.do")
-    public ResultModel<Integer> insertTestTube(@RequestBody TestTube model){
+    public ResultModel<Integer> insertTestTube(@RequestBody TestTube model) throws BusinessException {
         testTubeService.insertTestTube(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "开管成功", model.getTestTubeId(), true);
     }
