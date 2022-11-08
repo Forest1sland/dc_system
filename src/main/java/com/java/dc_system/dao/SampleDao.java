@@ -24,4 +24,6 @@ public interface SampleDao {
     Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTube);
     //该试管下的被检测人员信息
     List<Sample> selectInfoUnderSample(@Param("testTubeId") Integer testTubeId);
+
+    Integer deleteOneByPeopleId(@Param("peopleId") Integer peopleId);
 }

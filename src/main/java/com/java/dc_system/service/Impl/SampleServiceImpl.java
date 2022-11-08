@@ -18,6 +18,7 @@ public class SampleServiceImpl implements ISampleService {
 
     @Autowired
     private SampleDao sampleDao;
+
     @Override
     public List<Sample> selectSample(Sample sample) {
         return sampleDao.selectSample(sample);
@@ -36,5 +37,10 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public List<Sample> selectInfoUnderSample(Integer testTubeId) {
         return sampleDao.selectInfoUnderSample(testTubeId);
+    }
+
+    @Override
+    public Integer deleteOneByPeopleId(Integer peopleId) {
+        return sampleDao.deleteOneByPeopleId(peopleId);
     }
 }

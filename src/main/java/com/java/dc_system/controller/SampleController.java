@@ -1,10 +1,10 @@
 package com.java.dc_system.controller;
 
+import com.java.dc_system.pojo.People;
 import com.java.dc_system.pojo.Sample;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ISampleService;
 import com.java.dc_system.utils.CodeEnum;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,26 +25,32 @@ public class SampleController {
     private ISampleService sampleService;
 
     @PostMapping("/selectSample.do")
-    public ResultModel<List<Sample>> selectSample(@RequestBody Sample sample){
+    public ResultModel<List<Sample>> selectSample(@RequestBody Sample sample) {
         List<Sample> sampleList = sampleService.selectSample(sample);
-        return new ResultModel<>(CodeEnum.SUCCESS, "检索到样本信息" ,sampleList , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "检索到样本信息", sampleList, true);
     }
 
     @PostMapping("/insertSample.do")
-    public ResultModel<Integer> insertSample(@RequestBody Sample sample){
+    public ResultModel<Integer> insertSample(@RequestBody Sample sample) {
         int num = sampleService.insertSample(sample);
-        return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加" ,num , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加", num, true);
     }
 
     @PostMapping("/checkSampleTestTubeId.do")
-    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample){
+    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample) {
         int num = sampleService.checkSampleTestTubeId(sample.getTestTubeId());
-        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量" ,num , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量", num, true);
     }
 
     @PostMapping("/selectInfoUnderSample.do")
-    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample){
+    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) {
         List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
-        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息" ,sampleList , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息", sampleList, true);
+    }
+
+    @PostMapping("/deleteOneByPeopleId")
+    public ResultModel<Integer> deleteOneByPeopleId(@RequestBody People model) {
+        Integer res = sampleService.deleteOneByPeopleId(model.getPeopleId());
+        return new ResultModel<>(CodeEnum.SUCCESS, "已删除该条信息", res, true);
     }
 }

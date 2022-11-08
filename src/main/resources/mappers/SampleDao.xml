@@ -37,26 +37,31 @@
         <result property="testTube.box.transferId" column="transferId"/>
     </resultMap>
     <select id="selectInfoUnderSample" resultMap="selectSample" parameterType="Sample">
-        select sample.*,people.*,testtube.*,box.* from sample
-        left join people on sample.peopleId = people.peopleId
-        left join testtube on sample.testTubeId = testtube.testTubeId
-        left join box on box.boxId = testtube.boxId
-        where sample.testTubeId = #{testTubeId} and
-        sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
+        select sample.*, people.*, testtube.*, box.*
+        from sample
+                 left join people on sample.peopleId = people.peopleId
+                 left join testtube on sample.testTubeId = testtube.testTubeId
+                 left join box on box.boxId = testtube.boxId
+        where sample.testTubeId = #{testTubeId}
+          and sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
     </select>
     <!--检索样本数据-->
     <select id="selectSample" resultType="Sample">
-        select * from sample
+        select *
+        from sample
         <where>
             <trim suffixOverrides="or|and">
                 <if test="sampleId != null">
-                    sampleId = #{sampleId} or
+                    sampleId = #{sampleId}
+                       or
                 </if>
                 <if test="peopleId != null">
-                    peopleId = #{peopleId} or
+                    peopleId = #{peopleId}
+                       or
                 </if>
                 <if test="testTubeId != null">
-                    testTubeId = #{testTubeId} or
+                    testTubeId = #{testTubeId}
+                       or
                 </if>
                 <if test="collectTime != null">
                     collectTime = NOW()
@@ -66,10 +71,19 @@
     </select>
     <!--添加样本数据-->
     <insert id="insertSample" parameterType="Sample" useGeneratedKeys="true" keyProperty="sampleId">
-        insert into sample values (null  ,#{peopleId} ,#{testTubeId} ,#{collectTime})
+        insert into sample
+        values (null, #{peopleId}, #{testTubeId}, #{collectTime})
     </insert>
     <!--检索样本中试管数量-->
     <select id="checkSampleTestTubeId" resultType="Integer">
-        select count(*) from sample where testTubeId = #{testTubeId}
+        select count(*)
+        from sample
+        where testTubeId = #{testTubeId}
     </select>
+
+    <delete id="deleteOneByPeopleId">
+        delete
+        FROM sample
+        where peopleId = #{peopleId}
+    </delete>
 </mapper>
