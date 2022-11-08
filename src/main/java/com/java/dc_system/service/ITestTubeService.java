@@ -14,9 +14,9 @@ public interface ITestTubeService {
     //添加试管信息(开管)
     int insertTestTube(TestTube testTube) throws BusinessException;
     //查询该箱子下试管信息
-    List<TestTube> selectTestTube(TestTube testTube);
+    List<TestTube> selectTestTube(TestTube testTube) throws BusinessException;
     //更新试管信息(封管)
-    int updateTestTube(TestTube testTube);
+    int updateTestTube(TestTube testTube) throws BusinessException;
     //试管数量校验
-    Integer checkTestTube();
+    int checkTestTube(Integer boxId) throws BusinessException;
 }

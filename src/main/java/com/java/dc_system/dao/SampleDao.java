@@ -1,9 +1,6 @@
 package com.java.dc_system.dao;
 
 import com.java.dc_system.pojo.Sample;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,7 +18,7 @@ public interface SampleDao {
     //添加样本数据
     int insertSample(Sample sample);
     //试管人数校验
-    Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTube);
+    Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTubeId);
     //该试管下的被检测人员信息
     List<Sample> selectInfoUnderSample(@Param("testTubeId") Integer testTubeId);
 }

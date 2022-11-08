@@ -8,10 +8,7 @@ import com.java.dc_system.service.IBoxService;
 import com.java.dc_system.service.ITestTubeService;
 import com.java.dc_system.until.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +26,12 @@ public class BoxController {
     @Autowired
     private ITestTubeService testTubeService;
 
-    @PostMapping("/checkTestTubeId.do")
-    public Integer checkTestTubeId(){
-        return testTubeService.checkTestTube();
+    //获取当前转运箱下的试管数量
+    @PostMapping("/checkTestTubeNum.do")
+    public ResultModel<Integer> checkTestTubeId(@RequestBody Box model) throws BusinessException {
+        int num = testTubeService.checkTestTube(model.getBoxId());
+        return new ResultModel<>(CodeEnum.SUCCESS, "该转运箱下试管数量", num, true);
     }
-
     @PostMapping("/insertBox.do")
     public ResultModel<Integer> insertBox(@RequestBody Box model) throws BusinessException {
         boxService.insertBox(model);
@@ -54,7 +52,7 @@ public class BoxController {
 
     //获取当前转运箱下的试管
     @PostMapping("/getBoxTestTube.do")
-    public ResultModel<List<TestTube>> getBoxTestTube(@RequestBody Box model){
+    public ResultModel<List<TestTube>> getBoxTestTube(@RequestBody Box model) throws BusinessException {
         TestTube testTube = new TestTube();
         testTube.setBoxId(model.getBoxId());
         List<TestTube> testTubes = testTubeService.selectTestTube(testTube);

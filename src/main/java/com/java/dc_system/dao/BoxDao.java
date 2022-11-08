@@ -18,4 +18,5 @@ public interface BoxDao {
     int updateBox(Box box);
     //查询转运箱信息
     List<Box> getBox(Box box);
+
 }

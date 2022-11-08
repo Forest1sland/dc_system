@@ -24,8 +24,8 @@ public class Sample {
     private Integer testTubeId;
     //采集时间
     private Date collectTime;
-    //
+    //被采集人员People类
     private People people;
-    //
+    //试管采集表TestTube类
     private TestTube testTube;
 }

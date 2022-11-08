@@ -25,22 +25,37 @@ public class TestTubeServiceImpl implements ITestTubeService {
         if (num != 0){
             return num;
         } else{
-            throw new BusinessException("被检测人员信息没有注册", CodeEnum.BUSINESS_ERROR);
+            throw new BusinessException("没有添加试管数据", CodeEnum.BUSINESS_ERROR);
         }
     }
 
     @Override
-    public List<TestTube> selectTestTube(TestTube testTube) {
-        return testTubeDao.selectTestTube(testTube);
+    public List<TestTube> selectTestTube(TestTube testTube) throws BusinessException {
+        List<TestTube> tubeList = testTubeDao.selectTestTube(testTube);
+        if (tubeList != null){
+            return tubeList;
+        } else{
+            throw new BusinessException("没有检索到到试管数据", CodeEnum.BUSINESS_ERROR);
+        }
     }
 
     @Override
-    public int updateTestTube(TestTube testTube) {
-        return testTubeDao.updateTestTube(testTube);
+    public int updateTestTube(TestTube testTube) throws BusinessException {
+        int num = testTubeDao.updateTestTube(testTube);
+        if (num != 0){
+            return num;
+        } else{
+            throw new BusinessException("没有更新试管数据", CodeEnum.BUSINESS_ERROR);
+        }
     }
 
     @Override
-    public Integer checkTestTube() {
-        return testTubeDao.checkTestTube();
+    public int checkTestTube(Integer boxId) throws BusinessException {
+        int num = testTubeDao.checkTestTube(boxId);
+        if (num != 0){
+            return num;
+        } else{
+            throw new BusinessException("没有检索到试管数量", CodeEnum.BUSINESS_ERROR);
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.java.dc_system.dao;
 
 import com.java.dc_system.pojo.TestTube;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface TestTubeDao {
     //更新试管信息(封管)
     int updateTestTube(TestTube testTube);
     //试管数量校验
-    Integer checkTestTube();
+    int checkTestTube(@Param("boxId")Integer boxId);
 }

@@ -58,9 +58,8 @@
         insert into testtube
         <include refid="insertTestTube"/>
     </insert>
-
     <!--检索试管信息-->
-    <select id="selectTestTube" resultType="TestTube">
+    <select id="selectTestTube" resultType="TestTube" parameterType="TestTube">
         select * from testtube
         <where>
             <trim  prefixOverrides="or">
@@ -81,8 +80,8 @@
         </set>
         where testTubeId = #{testTubeId}
     </update>
-    <!--查询试管数量-->
-    <select id="checkTestTube" resultType="integer">
-        select count(testTubeId) from testtube
+    <!--查询(校验)试管数量-->
+    <select id="checkTestTube" resultType="java.lang.Integer">
+        select count(*) from testtube where boxId = #{boxId}
     </select>
 </mapper>
