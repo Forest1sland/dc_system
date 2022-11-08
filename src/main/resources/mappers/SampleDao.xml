@@ -68,7 +68,7 @@
     <insert id="insertSample" parameterType="Sample" useGeneratedKeys="true" keyProperty="sampleId">
         insert into sample values (null  ,#{peopleId} ,#{testTubeId} ,#{collectTime})
     </insert>
-    <!--检索样本中试管数量-->
+    <!--检索样本中该试管数量-->
     <select id="checkSampleTestTubeId" resultType="Integer">
         select count(*) from sample where testTubeId = #{testTubeId}
     </select>

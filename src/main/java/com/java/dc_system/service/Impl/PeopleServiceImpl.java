@@ -20,8 +20,8 @@ public class PeopleServiceImpl implements IPeopleService {
     @Autowired
     private PeopleDao peopleDao;
     @Override
-    public List<People> getAllPeople() throws BusinessException {
-        List<People> peopleList = peopleDao.getAllPeople();
+    public List<People> getAllPeople(People model) throws BusinessException {
+        List<People> peopleList = peopleDao.getPeople(model);
         if (peopleList != null){
             return peopleList;
         } else{
@@ -30,8 +30,8 @@ public class PeopleServiceImpl implements IPeopleService {
     }
 
     @Override
-    public People getOnePeople(People model) throws BusinessException {
-        People people = peopleDao.getOnePeople(model);
+    public List<People> getOnePeople(People model) throws BusinessException {
+        List<People> people = peopleDao.getPeople(model);
         if (people != null){
             return people;
         } else{

@@ -14,9 +14,7 @@ import java.util.List;
 @Mapper
 public interface PeopleDao {
     //查询全部被检测人员
-    List<People> getAllPeople();
-    //通过Id查询被检测人员
-    People getOnePeople(People model);
+    List<People> getPeople(People model);
     //通过Id修改被检测人员信息
     int updatePeople(People model);
     //通过Id删除被检测人员信息

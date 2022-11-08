@@ -32,24 +32,24 @@ public class BoxController {
         int num = testTubeService.checkTestTube(model.getBoxId());
         return new ResultModel<>(CodeEnum.SUCCESS, "该转运箱下试管数量", num, true);
     }
+    //开箱
     @PostMapping("/insertBox.do")
     public ResultModel<Integer> insertBox(@RequestBody Box model) throws BusinessException {
         boxService.insertBox(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "添加转运箱信息成功", model.getBoxId(), true);
     }
-
+    //更新转运箱信息
     @PostMapping("/updateBox.do")
     public ResultModel<Integer> updateBox(@RequestBody Box model) throws BusinessException {
         int num = boxService.updateBox(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "已更新转运箱信息", num, true);
     }
-
+    //获取转运箱信息
     @PostMapping("/getBox.do")
     public ResultModel<List<Box>> getBox(@RequestBody Box model) throws BusinessException {
         List<Box> boxList = boxService.getBox(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "检索到转运箱信息", boxList, true);
     }
-
     //获取当前转运箱下的试管
     @PostMapping("/getBoxTestTube.do")
     public ResultModel<List<TestTube>> getBoxTestTube(@RequestBody Box model) throws BusinessException {

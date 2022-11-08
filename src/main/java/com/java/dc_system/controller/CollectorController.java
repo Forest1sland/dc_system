@@ -26,8 +26,10 @@ public class CollectorController {
 
     @Autowired
     private ICollectorService collectorService;
+    //检测人员注册
     @PostMapping("/registerCollector.do")
     public ResultModel<Integer> registerCollector(@RequestBody Collector model) throws BusinessException {
+
         List<Collector> collector = collectorService.loginCollector(model.getIdCard(),model.getTel(),null);
         if (collector.size() == 0){
             Integer num =  collectorService.registerCollector(model);
@@ -40,30 +42,31 @@ public class CollectorController {
             return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "您已经注册", collector.size(), false);
         }
     }
+    //检测人员登录
     @PostMapping("/loginCollector.do")
     public ResultModel<List<Collector>> loginCollector(@RequestBody Collector collector) throws BusinessException {
         List<Collector> result =  collectorService.loginCollector(null,collector.getTel(), collector.getPassword());
         return new ResultModel<>(CodeEnum.SUCCESS, "登录成功", result, true);
     }
-
+    //获取检测人员信息
     @PostMapping("/getCollectorById.do")
     public ResultModel<Collector> getCollectorById(Integer collectorId) throws BusinessException {
         Collector result =  collectorService.getCollectorById(collectorId);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息检索成功", result, true);
     }
-
+    //删除检测人员信息
     @PostMapping("/deleteCollector.do")
     public ResultModel<Integer> deleteCollector(Integer collectorId) throws BusinessException {
         Integer num =  collectorService.deleteCollector(collectorId);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息删除成功", num, true);
     }
-
+    //更新检测人员信息
     @PostMapping("/updateCollector.do")
     public ResultModel<Integer> updateCollector(@RequestBody Collector model) throws BusinessException {
         Integer num =  collectorService.updateCollector(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "信息更新成功", num, true);
     }
-
+    //获取全部检测人员信息
     @PostMapping("/getAllCollector.do")
     public ResultModel<List<Collector>> getAllCollector() throws BusinessException {
         List<Collector> result =  collectorService.getAllCollector();

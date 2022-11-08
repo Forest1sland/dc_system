@@ -1,5 +1,6 @@
 package com.java.dc_system.controller;
 
+import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.pojo.Sample;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ISampleService;
@@ -23,27 +24,27 @@ import java.util.List;
 public class SampleController {
     @Autowired
     private ISampleService sampleService;
-
+    //查询样本信息
     @PostMapping("/selectSample.do")
-    public ResultModel<List<Sample>> selectSample(@RequestBody Sample sample){
+    public ResultModel<List<Sample>> selectSample(@RequestBody Sample sample) throws BusinessException {
         List<Sample> sampleList = sampleService.selectSample(sample);
         return new ResultModel<>(CodeEnum.SUCCESS, "检索到样本信息" ,sampleList , true);
     }
-
+    //添加样本信息
     @PostMapping("/insertSample.do")
-    public ResultModel<Integer> insertSample(@RequestBody Sample sample){
+    public ResultModel<Integer> insertSample(@RequestBody Sample sample) throws BusinessException {
         int num = sampleService.insertSample(sample);
         return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加" ,num , true);
     }
-
+    //获取试管下样本数量
     @PostMapping("/checkSampleTestTubeId.do")
-    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample){
+    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample) throws BusinessException{
         int num = sampleService.checkSampleTestTubeId(sample.getTestTubeId());
         return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量" ,num , true);
     }
-
+    //获取试管下的样本数据
     @PostMapping("/selectInfoUnderSample.do")
-    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample){
+    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) throws BusinessException{
         List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
         return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息" ,sampleList , true);
     }
