@@ -41,8 +41,8 @@
     <delete id="deletePeople">
         delete from people where peopleId = #{peopleId}
     </delete>
-    <!--检测人员注册-->
-    <insert id="registerPeople" parameterType="People">
+    <!--被检测人员注册-->
+    <insert id="registerPeople" parameterType="People" useGeneratedKeys="true" keyProperty="peopleId">
         insert into people values (null ,#{name} ,#{idCardType} ,
         #{idCard} ,#{tel} ,#{createTime})
     </insert>

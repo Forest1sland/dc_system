@@ -36,7 +36,7 @@ public class PeopleController {
         if (people.size() == 0){
             int num = peopleService.registerPeople(model);
             if(num !=0){
-                return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", num, true);
+                return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", model.getPeopleId(), true);
             }else {
                 return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, false);
             }

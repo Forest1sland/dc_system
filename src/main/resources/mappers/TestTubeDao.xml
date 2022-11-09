@@ -3,6 +3,30 @@
 <mapper namespace="com.java.dc_system.dao.TestTubeDao">
 
     <sql id="insertTestTube">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            testTubeId ,
+            <if test="testTubeCode != null and testTubeCode != ''">
+                testTubeCode,
+            </if>
+            <if test="boxId != null">
+                boxId,
+            </if>
+            <if test="collectType != null">
+                collectType,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="testResult != null">
+                testResult,
+            </if>
+            <if test="openTime != null">
+                openTime,
+            </if>
+            <if test="closeTime != null">
+                closeTime,
+            </if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             null ,
            <if test="testTubeCode != null and testTubeCode != ''">

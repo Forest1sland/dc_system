@@ -36,6 +36,48 @@
         <result property="testTube.box.testOrganizationId" column="testOrganizationId"/>
         <result property="testTube.box.transferId" column="transferId"/>
     </resultMap>
+    <sql id="updateSample">
+        <trim prefix="set" suffix="," suffixOverrides=",">
+            <if test="sampleId != null">
+                sampleId = #{sampleId},
+            </if>
+            <if test="peopleId != null">
+                peopleId = #{peopleId},
+            </if>
+            <if test="testTubeId != null">
+                testTubeId = #{testTubeId},
+            </if>
+            <if test="collectTime != null">
+                collectTime = #{collectTime},
+            </if>
+        </trim>
+    </sql>
+    <sql id="insertSample">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            sampleId ,
+            <if test="peopleId != null">
+                peopleId,
+            </if>
+            <if test="testTubeId != null">
+                testTubeId,
+            </if>
+            <if test="collectTime != null">
+                collectTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            null ,
+            <if test="peopleId != null">
+                #{peopleId},
+            </if>
+            <if test="testTubeId != null">
+                #{testTubeId},
+            </if>
+            <if test="collectTime != null">
+                #{collectTime},
+            </if>
+        </trim>
+    </sql>
     <select id="selectInfoUnderSample" resultMap="selectSample" parameterType="Sample">
         select sample.*,people.*,testtube.*,box.* from sample
         left join people on sample.peopleId = people.peopleId
@@ -66,10 +108,16 @@
     </select>
     <!--添加样本数据-->
     <insert id="insertSample" parameterType="Sample" useGeneratedKeys="true" keyProperty="sampleId">
-        insert into sample values (null  ,#{peopleId} ,#{testTubeId} ,#{collectTime})
+        insert into sample
+        <include refid="insertSample"/>
     </insert>
     <!--检索样本中该试管数量-->
     <select id="checkSampleTestTubeId" resultType="Integer">
         select count(*) from sample where testTubeId = #{testTubeId}
     </select>
+    <!--更新样本数据-->
+    <update id="updateSample">
+        update sample
+        <include refid="updateSample"/>
+    </update>
 </mapper>
