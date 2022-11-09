@@ -62,12 +62,30 @@
     <select id="selectTestTube" resultType="TestTube" parameterType="TestTube">
         select * from testtube
         <where>
-            <trim  prefixOverrides="or">
+            <trim  prefixOverrides="or|and">
                 <if test="testTubeId != null">
                     testTubeId = #{testTubeId}
                 </if>
                 <if test="boxId != null">
                     or boxId = #{boxId}
+                </if>
+                <if test="testTubeCode != null and testTubeCode != ''">
+                    or testTubeCode = #{testTubeCode}
+                </if>
+                <if test="collectType != null">
+                    or collectType =  #{collectType}
+                </if>
+                <if test="status != null">
+                    or status = #{status}
+                </if>
+                <if test="testResult != null and testResult != ''">
+                    or  testResult = #{testResult}
+                </if>
+                <if test="openTime != null">
+                    openTime = #{openTime}
+                </if>
+                <if test="closeTime != null ">
+                    and closeTime =  #{closeTime}
                 </if>
             </trim>
         </where>

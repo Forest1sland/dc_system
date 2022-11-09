@@ -35,8 +35,13 @@ public class BoxController {
     //开箱
     @PostMapping("/insertBox.do")
     public ResultModel<Integer> insertBox(@RequestBody Box model) throws BusinessException {
-        boxService.insertBox(model);
-        return new ResultModel<>(CodeEnum.SUCCESS, "添加转运箱信息成功", model.getBoxId(), true);
+        List<Box> boxList = boxService.getBox(model);
+        if(boxList.isEmpty()){
+            boxService.insertBox(model);
+            return new ResultModel<>(CodeEnum.SUCCESS, "开箱成功", model.getBoxId(), true);
+        }else {
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "该转运箱已存在", null, true);
+        }
     }
     //更新转运箱信息
     @PostMapping("/updateBox.do")
