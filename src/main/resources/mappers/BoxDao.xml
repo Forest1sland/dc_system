@@ -147,7 +147,7 @@
             </if>
         </where>
     </update>
-    <!--获取转运箱信息(查看转运箱信息)-->
+    <!--获取转运箱信息(查看转运箱信息,转运箱号校验)-->
     <select id="getBox" resultType="Box">
         select *
         from box

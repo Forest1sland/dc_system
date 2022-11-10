@@ -20,22 +20,22 @@ public class PeopleServiceImpl implements IPeopleService {
     @Autowired
     private PeopleDao peopleDao;
     @Override
-    public List<People> getAllPeople() throws BusinessException {
-        List<People> peopleList = peopleDao.getAllPeople();
+    public List<People> getAllPeople(People model) throws BusinessException {
+        List<People> peopleList = peopleDao.getPeople(model);
         if (peopleList != null){
             return peopleList;
         } else{
-            throw new BusinessException("检索被检测人员信息失败", CodeEnum.BUSINESS_ERROR);
+            throw new BusinessException("没有获取到被检测人员信息", CodeEnum.BUSINESS_ERROR);
         }
     }
 
     @Override
-    public People getOnePeople(People model) throws BusinessException {
-        People people = peopleDao.getOnePeople(model);
+    public List<People> getOnePeople(People model) throws BusinessException {
+        List<People> people = peopleDao.getPeople(model);
         if (people != null){
             return people;
         } else{
-            throw new BusinessException("没有获取到检测人员信息", CodeEnum.BUSINESS_ERROR);
+            throw new BusinessException("没有获取到被检测人员信息", CodeEnum.BUSINESS_ERROR);
         }
     }
 

@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.java.dc_system.dao.PeopleDao">
-    <!--查询所有的被检测人员信息-->
-    <select id="getAllPeople" resultType="People">
-        select *
-        from people
-    </select>
     <!--通过Id获取被检测人员信息-->
-    <select id="getOnePeople" resultType="People" parameterType="People">
-        select *
-        from people
+    <select id="getPeople" resultType="People" parameterType="People">
+        select * from people
         <where>
-            <if test="tel != null and tel != ''">
-                tel = #{tel}
-            </if>
-            <if test="idCard != null and idCard != ''">
-                and idCard = #{idCard}
-            </if>
-            <if test="peopleId != null and peopleId != ''">
-                and peopleId = #{peopleId}
-            </if>
+            <trim suffixOverrides="and|or">
+                <if test="tel != null and tel != '' ">
+                    tel = #{tel} or
+                </if>
+                <if test="idCard != null and idCard != '' ">
+                    idCard = #{idCard} or
+                </if>
+                <if test="peopleId != null">
+                    peopleId = #{peopleId}
+                </if>
+            </trim>
         </where>
     </select>
     <!--通过Id修改更改被检测人员信息-->
@@ -54,7 +50,6 @@
                 #{idCard}, #{tel}, #{createTime})
     </insert>
     <!--被检测人员登录-->
-    <!--被检测人员的注册验证-->
     <select id="loginPeople" resultType="People">
         select *
         from people

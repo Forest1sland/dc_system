@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IPeopleService {
     //查询全部被检测人员
-    List<People> getAllPeople() throws BusinessException;
+    List<People> getAllPeople(People model) throws BusinessException;
     //通过Id查询被检测人员
-    People getOnePeople(People model) throws BusinessException;
+    List<People> getOnePeople(People model) throws BusinessException;
     //通过Id修改被检测人员信息
     int updatePeople(People model) throws BusinessException;
     //通过Id删除被检测人员信息
