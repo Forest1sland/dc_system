@@ -67,6 +67,12 @@ public class PeopleController {
         return new ResultModel<>(CodeEnum.SUCCESS, "成功更新检测人员信息", people, true);
     }
 
+    /**
+     * 通过人员id查询信息
+     * @param model
+     * @return
+     * @throws BusinessException
+     */
     @PostMapping("/getPeopleById")
     public ResultModel<People> getPeopleById(@RequestBody People model) throws BusinessException {
         People people = peopleService.getOnePeople(model);
