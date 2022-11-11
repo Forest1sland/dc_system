@@ -27,7 +27,9 @@ public class TestTubeController {
     //开管
     @PostMapping("/insertTestTube.do")
     public ResultModel<Object> insertTestTube(@RequestBody TestTube model) throws BusinessException {
-        List<TestTube> tubeList = testTubeService.selectTestTube(model);
+        TestTube testTube = new TestTube();
+        testTube.setTestTubeCode(model.getTestTubeCode());
+        List<TestTube> tubeList = testTubeService.selectTestTube(testTube);
         if (tubeList.isEmpty()){
             int num = testTubeService.insertTestTube(model);
             if (num != 0){
