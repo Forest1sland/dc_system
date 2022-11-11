@@ -45,7 +45,7 @@ public class SampleController {
             if (count != 0){
                 return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加" ,sample.getSampleId() , true);
             }else {
-                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败" ,0 , false);
+                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败" ,count , false);
             }
         }
     }
