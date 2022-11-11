@@ -35,7 +35,9 @@ public class BoxController {
     //开箱
     @PostMapping("/insertBox.do")
     public ResultModel<Integer> insertBox(@RequestBody Box model) throws BusinessException {
-        List<Box> boxList = boxService.getBox(model);
+        Box box = new Box();
+        box.setBoxCode(model.getBoxCode());
+        List<Box> boxList = boxService.getBox(box);
         if(boxList.isEmpty()){
             boxService.insertBox(model);
             return new ResultModel<>(CodeEnum.SUCCESS, "开箱成功", model.getBoxId(), true);
