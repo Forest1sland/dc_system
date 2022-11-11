@@ -42,10 +42,20 @@ public class BoxServiceImpl implements IBoxService {
     @Override
     public List<Box> getBox(Box box) throws BusinessException {
         List<Box> boxList = boxDao.getBox(box);
-        if (boxList !=null){
+        if (boxList != null) {
             return boxList;
-        } else{
+        } else {
             throw new BusinessException("检索转运箱信息失败", CodeEnum.BUSINESS_ERROR);
+        }
+    }
+
+    @Override
+    public int deleteBox(Box box) throws BusinessException {
+        int num = boxDao.deleteBox(box);
+        if (num != 0) {
+            return num;
+        } else {
+            throw new BusinessException("转运箱信息删除失败", CodeEnum.BUSINESS_ERROR);
         }
     }
 }

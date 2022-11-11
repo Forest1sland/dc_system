@@ -5,7 +5,6 @@ import com.java.dc_system.pojo.Sample;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ISampleService;
 import com.java.dc_system.until.CodeEnum;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,23 +41,32 @@ public class SampleController {
             return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "被检测人员已添加" ,sampleList.size(), false);
         }else {
             int count = sampleService.insertSample(sample);
-            if (count != 0){
-                return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加" ,sample.getSampleId() , true);
-            }else {
-                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败" ,count , false);
+            if (count != 0) {
+                return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加", sample.getSampleId(), true);
+            } else {
+                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败", count, false);
             }
         }
     }
+
     //获取试管下样本数量
     @PostMapping("/checkSampleTestTubeId.do")
-    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample) throws BusinessException{
+    public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample) throws BusinessException {
         int num = sampleService.checkSampleTestTubeId(sample.getTestTubeId());
-        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量" ,num , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本数量", num, true);
     }
+
     //获取试管下的样本数据
     @PostMapping("/selectInfoUnderSample.do")
-    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) throws BusinessException{
+    public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) throws BusinessException {
         List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
-        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息" ,sampleList , true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息", sampleList, true);
+    }
+
+    //删除样本信息
+    @PostMapping("/deleteSample.do")
+    public ResultModel<Integer> deleteSample(@RequestBody Sample sample) throws BusinessException {
+        Integer num = sampleService.deleteSample(sample);
+        return new ResultModel<>(CodeEnum.SUCCESS, "删除样本信息", num, true);
     }
 }

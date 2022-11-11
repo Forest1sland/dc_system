@@ -120,4 +120,24 @@
         update sample
         <include refid="updateSample"/>
     </update>
+    <!--删除样本信息-->
+    <delete id="deleteSample" parameterType="Sample">
+        delete from sample
+        <where>
+            <trim suffixOverrides="and|or">
+                <if test="sampleId != null">
+                    sampleId = #{sampleId} or
+                </if>
+                <if test="peopleId != null">
+                    peopleId = #{peopleId} or
+                </if>
+                <if test="testTubeId != null">
+                    testTubeId = #{testTubeId} or
+                </if>
+                <if test="collectTime != null">
+                    collectTime = #{collectTime}
+                </if>
+            </trim>
+        </where>
+    </delete>
 </mapper>

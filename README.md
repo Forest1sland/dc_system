@@ -73,6 +73,23 @@ tube_person_relation:tubeId,personId
 （5）删除采集人员信息：http://localhost:8081/collector/deleteCollector.do
 
 （6）更新采集人员信息：http://localhost:8081/collector/updateCollector.do
+
+2.被采集人员接口
+
+（1）获取全部被采集人员信息：http://localhost:8081/people/getAllPeople.do
+
+（2）获取单条被采集人员信息：http://localhost:8081/people/getOnePeople.do
+
+（3）被采集人员登录：http://localhost:8081/people/loginPeople.do
+
+（4）被采集人员注册：http://localhost:8081/people/registerPeople.do
+
+（5）被采集人员删除：http://localhost:8081/people/deletePeople.do
+
+（6）被采集人员更新：http://localhost:8081/people/updatePeople.do
+
+3.
+
 ##### 采集人员端
 
 登录结果 登录接口(Collector collector(手机号 密码))   
@@ -80,7 +97,6 @@ tube_person_relation:tubeId,personId
 开启结果 开箱接口(Case case(转运箱号，开箱时间，转运箱状态(默认0)))  
 数量 获取当前转运箱中试管数()  
 开管结果 开管接口(Tube tube(试管号 开管日期 试管状态(默认0) 转运箱号))
-
 
 ### 2.前端项目结构
 

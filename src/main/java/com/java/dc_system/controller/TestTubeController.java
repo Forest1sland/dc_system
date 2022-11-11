@@ -57,11 +57,18 @@ public class TestTubeController {
     @PostMapping("/checkTestTube.do")
     public ResultModel<Integer> checkTestTube(@RequestBody TestTube model) throws BusinessException {
         int num = testTubeService.checkTestTube(model.getBoxId());
-        if (num<=50){
+        if (num <= 50) {
             return new ResultModel<>(CodeEnum.SUCCESS, "试管数量", num, true);
-        }else {
+        } else {
             return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "试管数量已最大", num, false);
         }
 
+    }
+
+    //删除试管数据
+    @PostMapping("/deleteTestTube.do")
+    public ResultModel<Integer> deleteTestTube(@RequestBody TestTube model) throws BusinessException {
+        int num = testTubeService.deleteTestTube(model.getTestTubeId());
+        return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "试管信息已删除", num, false);
     }
 }

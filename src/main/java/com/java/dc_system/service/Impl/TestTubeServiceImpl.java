@@ -52,10 +52,20 @@ public class TestTubeServiceImpl implements ITestTubeService {
     @Override
     public int checkTestTube(Integer boxId) throws BusinessException {
         int num = testTubeDao.checkTestTube(boxId);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有检索到试管数量", CodeEnum.BUSINESS_ERROR);
+        }
+    }
+
+    @Override
+    public int deleteTestTube(Integer testTubeId) throws BusinessException {
+        int num = testTubeDao.deleteTestTube(testTubeId);
+        if (num != 0) {
+            return num;
+        } else {
+            throw new BusinessException("没有删除试管数量", CodeEnum.BUSINESS_ERROR);
         }
     }
 }

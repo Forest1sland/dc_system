@@ -8,7 +8,10 @@ import com.java.dc_system.service.IBoxService;
 import com.java.dc_system.service.ITestTubeService;
 import com.java.dc_system.until.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,7 +28,6 @@ public class BoxController {
     private IBoxService boxService;
     @Autowired
     private ITestTubeService testTubeService;
-
     //获取当前转运箱下的试管数量
     @PostMapping("/checkTestTubeNum.do")
     public ResultModel<Integer> checkTestTubeId(@RequestBody Box model) throws BusinessException {
@@ -57,6 +59,7 @@ public class BoxController {
         List<Box> boxList = boxService.getBox(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "检索到转运箱信息", boxList, true);
     }
+
     //获取当前转运箱下的试管
     @PostMapping("/getBoxTestTube.do")
     public ResultModel<List<TestTube>> getBoxTestTube(@RequestBody Box model) throws BusinessException {
@@ -64,5 +67,12 @@ public class BoxController {
         testTube.setBoxId(model.getBoxId());
         List<TestTube> testTubes = testTubeService.selectTestTube(testTube);
         return new ResultModel<>(CodeEnum.SUCCESS, "检索到本转运箱下的试管信息", testTubes, true);
+    }
+
+    //删除转运箱信息
+    @PostMapping("/deleteBox.do")
+    public ResultModel<Integer> deleteBox(@RequestBody Box model) throws BusinessException {
+        int num = boxService.deleteBox(model);
+        return new ResultModel<>(CodeEnum.SUCCESS, "转运箱信息已删除", num, true);
     }
 }
