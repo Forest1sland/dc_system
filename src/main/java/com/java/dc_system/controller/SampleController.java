@@ -33,7 +33,11 @@ public class SampleController {
     //添加样本信息
     @PostMapping("/insertSample.do")
     public ResultModel<Integer> insertSample(@RequestBody Sample sample) throws BusinessException {
-        List<Sample> sampleList = sampleService.selectSample(sample);
+        //试管下同一被检测人员判断
+        Sample sample1 = new Sample();
+        sample1.setPeopleId(sample.getPeopleId());
+        sample1.setTestTubeId(sample.getTestTubeId());
+        List<Sample> sampleList = sampleService.selectSample(sample1);
         if (!sampleList.isEmpty()){
             return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "该试管下下已有该人员信息" ,1 , false);
         }else {
@@ -44,7 +48,6 @@ public class SampleController {
                 return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败" ,0 , false);
             }
         }
-
     }
     //获取试管下样本数量
     @PostMapping("/checkSampleTestTubeId.do")
