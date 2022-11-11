@@ -24,9 +24,9 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public List<Sample> selectSample(Sample sample) throws BusinessException {
         List<Sample> sampleList = sampleDao.selectSample(sample);
-        if (sampleList != null){
+        if (sampleList != null) {
             return sampleList;
-        } else{
+        } else {
             throw new BusinessException("没有获取样本数据", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -34,9 +34,9 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public int insertSample(Sample sample) throws BusinessException {
         int num = sampleDao.insertSample(sample);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有添加样本数据", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -44,9 +44,9 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public Integer checkSampleTestTubeId(Integer testTubeId) throws BusinessException {
         Integer num = sampleDao.checkSampleTestTubeId(testTubeId);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有获取样本中同一试管数量", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -54,11 +54,12 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public List<Sample> selectInfoUnderSample(Integer testTubeId) throws BusinessException {
         List<Sample> sampleList = sampleDao.selectInfoUnderSample(testTubeId);
-        if (sampleList.size()!= 0){
-            return sampleList;
-        } else{
-            throw new BusinessException("没有获取样本中同一试管数量", CodeEnum.BUSINESS_ERROR);
-        }
+//        if (sampleList.size()!= 0){
+        return sampleList;
+//        }
+//        else{
+//            throw new BusinessException("没有获取样本中同一试管数量", CodeEnum.BUSINESS_ERROR);
+//        }
     }
 
     @Override
