@@ -50,7 +50,7 @@ public class SampleController {
     @PostMapping("/selectInfoUnderSample.do")
     public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) throws BusinessException{
         List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
-        return new ResultModel<>(CodeEnum.SUCCESS, "该试管下样本信息", sampleList, true);
+        return new ResultModel<>(CodeEnum.SUCCESS, "已获取该试管下样本信息", sampleList, true);
     }
 
     /**
