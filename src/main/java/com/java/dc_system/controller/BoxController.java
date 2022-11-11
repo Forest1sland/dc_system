@@ -8,7 +8,10 @@ import com.java.dc_system.service.IBoxService;
 import com.java.dc_system.service.ITestTubeService;
 import com.java.dc_system.until.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,7 +28,6 @@ public class BoxController {
     private IBoxService boxService;
     @Autowired
     private ITestTubeService testTubeService;
-
     //获取当前转运箱下的试管数量
     @PostMapping("/checkTestTubeNum.do")
     public ResultModel<Integer> checkTestTubeId(@RequestBody Box model) throws BusinessException {
