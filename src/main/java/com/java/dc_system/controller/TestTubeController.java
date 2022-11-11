@@ -21,7 +21,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/testTube")
 public class TestTubeController {
-
     @Autowired
     private ITestTubeService testTubeService;
     //开管
