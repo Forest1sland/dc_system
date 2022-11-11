@@ -102,25 +102,25 @@
                    or
             </if>
             <if test="boxCode != null and boxCode != ''">
-                    boxCode = #{boxCode} and
+                boxCode = #{boxCode} or
             </if>
             <if test="status != null">
-                    status = #{status} and
+                status = #{status} or
             </if>
             <if test="collectorId != null">
-                    collectorId = #{collectorId} and
+                collectorId = #{collectorId} or
             </if>
             <if test="transferId != null">
-                    transferId = #{transferId} and
+                transferId = #{transferId} or
             </if>
             <if test="testerId">
-                    testerId = #{testerId} and
+                testerId = #{testerId} or
             </if>
             <if test="pointId != null">
-                    pointId = #{pointId} and
+                pointId = #{pointId} or
             </if>
             <if test="testOrganizationId != null">
-                    testOrganizationId = #{testOrganizationId} and
+                testOrganizationId = #{testOrganizationId} or
             </if>
             <if test="openTime != null">
                     openTime = #{openTime} and
@@ -153,4 +153,9 @@
         from box
         <include refid="getBox"/>
     </select>
+    <!--删除转运箱信息-->
+    <delete id="deleteBox">
+        delete from box
+        <include refid="getBox"/>
+    </delete>
 </mapper>

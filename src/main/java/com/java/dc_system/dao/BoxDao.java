@@ -18,5 +18,6 @@ public interface BoxDao {
     int updateBox(Box box);
     //查询转运箱信息
     List<Box> getBox(Box box);
-
+    //删除转运箱信息
+    int deleteBox(Box box);
 }

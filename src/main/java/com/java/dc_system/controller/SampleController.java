@@ -33,8 +33,12 @@ public class SampleController {
     //添加样本信息
     @PostMapping("/insertSample.do")
     public ResultModel<Integer> insertSample(@RequestBody Sample sample) throws BusinessException {
-        int num = sampleService.insertSample(sample);
-        return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加", num, true);
+        int count = sampleService.insertSample(sample);
+        if (count != 0){
+            return new ResultModel<>(CodeEnum.SUCCESS, "样本信息已添加" ,sample.getSampleId() , true);
+        }else {
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "样本信息添加失败" ,0 , false);
+        }
     }
     //获取试管下样本数量
     @PostMapping("/checkSampleTestTubeId.do")
