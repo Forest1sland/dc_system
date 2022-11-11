@@ -4,7 +4,7 @@ import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.dao.TestTubeDao;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.service.ITestTubeService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.util.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

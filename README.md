@@ -74,7 +74,7 @@ tube_person_relation:tubeId,personId
 
 （6）更新采集人员信息：http://localhost:8081/collector/updateCollector.do
 
-2.被采集人员接口
+2.被采集人员相关接口
 
 （1）获取全部被采集人员信息：http://localhost:8081/people/getAllPeople.do
 
@@ -88,7 +88,39 @@ tube_person_relation:tubeId,personId
 
 （6）被采集人员更新：http://localhost:8081/people/updatePeople.do
 
-3.
+3.样本相关接口
+
+（1）样本信息添加：http://localhost:8081/sample/insertSample.do
+
+（2）该试管下样本信息：http://localhost:8081/sample/selectInfoUnderSample.do
+
+（3）样本信息添加：http://localhost:8081/sample/insertSample.do
+
+（4）检索试管中的样本数量：http://localhost:8081/sample/checkSampleTestTubeId.do
+
+（5）样本信息的删除：http://localhost:8081/sample/deleteSample.do
+
+4.试管相关接口
+
+（1）试管信息删除：http://localhost:8081/testTube/deleteTestTube.do
+
+（2）获取试管信息：http://localhost:8081/testTube/selectTestTube.do
+
+（3）添加试管信息（开管）：http://localhost:8081/testTube/insertTestTube.do
+
+（4）更新试管信息（封管）：http://localhost:8081/testTube/updateTestTube.do
+
+5.转运箱相关接口
+
+（1）获取装运想信息：http://localhost:8081/box/getBox.do
+
+（2）添加转运箱信息：http://localhost:8081/box/insertBox.do
+
+（3）更新转运箱信息:http://localhost:8081/box/updateBox.do
+
+（4）获取该转运箱下的试管信息：http://localhost:8081/box/getBoxTestTube.do
+
+（5）获取该转运箱下试管数量：http://localhost:8081/box/checkTestTubeNum.do
 
 ##### 采集人员端
 

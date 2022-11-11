@@ -4,7 +4,7 @@ import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ITestTubeService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.util.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +21,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/testTube")
 public class TestTubeController {
-
     @Autowired
     private ITestTubeService testTubeService;
     //开管

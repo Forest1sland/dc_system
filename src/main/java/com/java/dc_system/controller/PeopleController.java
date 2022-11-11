@@ -4,7 +4,7 @@ import com.java.dc_system.Exception.BusinessException;
 import com.java.dc_system.pojo.People;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.IPeopleService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.util.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
