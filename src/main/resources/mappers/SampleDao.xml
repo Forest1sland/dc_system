@@ -35,6 +35,9 @@
         <result property="testTube.box.testerId" column="testerId"/>
         <result property="testTube.box.testOrganizationId" column="testOrganizationId"/>
         <result property="testTube.box.transferId" column="transferId"/>
+        <!--副表point-->
+        <result property="testTube.box.point.pointId" column="pointId"/>
+        <result property="testTube.box.point.pointName" column="pointName"/>
     </resultMap>
     <sql id="updateSample">
         <trim prefix="set" suffix="," suffixOverrides=",">
@@ -79,10 +82,11 @@
         </trim>
     </sql>
     <select id="selectInfoUnderSample" resultMap="selectSample" parameterType="Sample">
-        select sample.*,people.*,testtube.*,box.* from sample
+        select sample.*,people.*,testtube.*,box.*,point.* from sample
         left join people on sample.peopleId = people.peopleId
         left join testtube on sample.testTubeId = testtube.testTubeId
         left join box on box.boxId = testtube.boxId
+        left join point on box.pointId = point.pointId
         where sample.testTubeId = #{testTubeId} and
         sample.peopleId in (SELECT peopleId from sample WHERE testTubeId = #{testTubeId})
     </select>

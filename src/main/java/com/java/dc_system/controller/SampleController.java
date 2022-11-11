@@ -5,6 +5,8 @@ import com.java.dc_system.pojo.Sample;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.ISampleService;
 import com.java.dc_system.util.CodeEnum;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,17 +21,22 @@ import java.util.List;
  * @Description:
  */
 @RestController
+@Api(tags = "检测样本API")
 @RequestMapping("/sample")
 public class SampleController {
     @Autowired
     private ISampleService sampleService;
+
     //查询样本信息
+    @ApiOperation("查询样本信息")
     @PostMapping("/selectSample.do")
     public ResultModel<List<Sample>> selectSample(@RequestBody Sample sample) throws BusinessException {
         List<Sample> sampleList = sampleService.selectSample(sample);
         return new ResultModel<>(CodeEnum.SUCCESS, "检索到样本信息" ,sampleList , true);
     }
+
     //添加样本信息
+    @ApiOperation("添加样本信息")
     @PostMapping("/insertSample.do")
     public ResultModel<Integer> insertSample(@RequestBody Sample sample) throws BusinessException {
         //试管下同一被检测人员判断
@@ -50,6 +57,7 @@ public class SampleController {
     }
 
     //获取试管下样本数量
+    @ApiOperation("获取试管下样本数量")
     @PostMapping("/checkSampleTestTubeId.do")
     public ResultModel<Integer> checkSampleTestTubeId(@RequestBody Sample sample) throws BusinessException {
         int num = sampleService.checkSampleTestTubeId(sample.getTestTubeId());
@@ -57,6 +65,7 @@ public class SampleController {
     }
 
     //获取试管下的样本数据
+    @ApiOperation("获取试管下的样本数据")
     @PostMapping("/selectInfoUnderSample.do")
     public ResultModel<List<Sample>> selectInfoUnderSample(@RequestBody Sample sample) throws BusinessException {
         List<Sample> sampleList = sampleService.selectInfoUnderSample(sample.getTestTubeId());
@@ -64,6 +73,7 @@ public class SampleController {
     }
 
     //删除样本信息
+    @ApiOperation("删除样本信息")
     @PostMapping("/deleteSample.do")
     public ResultModel<Integer> deleteSample(@RequestBody Sample sample) throws BusinessException {
         Integer num = sampleService.deleteSample(sample);
