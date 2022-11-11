@@ -39,7 +39,7 @@ public class SampleController {
         sample1.setTestTubeId(sample.getTestTubeId());
         List<Sample> sampleList = sampleService.selectSample(sample1);
         if (!sampleList.isEmpty()){
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "被检测人员已添加" ,0 , false);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "被检测人员已添加" ,sampleList.size(), false);
         }else {
             int count = sampleService.insertSample(sample);
             if (count != 0){
