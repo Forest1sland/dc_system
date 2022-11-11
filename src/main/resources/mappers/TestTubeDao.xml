@@ -14,7 +14,7 @@
                 collectType,
             </if>
             <if test="status != null">
-                0,
+                status,
             </if>
             <if test="testResult != null">
                 testResult,
@@ -38,7 +38,7 @@
                 #{collectType},
             </if>
             <if test="status != null">
-                #{status},
+                0,
             </if>
             <if test="testResult != null">
                 #{testResult},

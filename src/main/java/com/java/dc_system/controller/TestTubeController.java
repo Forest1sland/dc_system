@@ -38,7 +38,7 @@ public class TestTubeController {
                 return new ResultModel<>(CodeEnum.SUCCESS, "开管失败", model.getTestTubeId(), false);
             }
         }else {
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "该试管已存在", tubeList.get(0).getTestTubeCode(), false);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "该试管已存在", tubeList.get(0).getTestTubeId(), false);
         }
     }
     //检索试管信息

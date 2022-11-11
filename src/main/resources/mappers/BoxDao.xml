@@ -39,7 +39,7 @@
                 #{boxCode},
             </if>
             <if test="status != null">
-                #{status},
+                0,
             </if>
             <if test="collectorId != null">
                 #{collectorId},
