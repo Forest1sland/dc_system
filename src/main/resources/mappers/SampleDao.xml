@@ -98,8 +98,7 @@
                        or
                 </if>
                 <if test="peopleId != null">
-                    peopleId = #{peopleId}
-                       or
+                    peopleId = #{peopleId} and
                 </if>
                 <if test="testTubeId != null">
                     testTubeId = #{testTubeId}

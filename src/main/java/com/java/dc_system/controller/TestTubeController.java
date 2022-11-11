@@ -53,4 +53,15 @@ public class TestTubeController {
         int num = testTubeService.updateTestTube(model);
         return new ResultModel<>(CodeEnum.SUCCESS, "封管成功", num, true);
     }
+    //该箱子下获取试管数量
+    @PostMapping("/checkTestTube.do")
+    public ResultModel<Integer> checkTestTube(@RequestBody TestTube model) throws BusinessException {
+        int num = testTubeService.checkTestTube(model.getBoxId());
+        if (num<=50){
+            return new ResultModel<>(CodeEnum.SUCCESS, "试管数量", num, true);
+        }else {
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "试管数量已最大", num, false);
+        }
+
+    }
 }
