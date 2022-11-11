@@ -1,12 +1,12 @@
 package com.java.dc_system.service.Impl;
 
 import com.java.dc_system.Exception.BusinessException;
-import com.java.dc_system.dao.TestTubeDao;
 import com.java.dc_system.pojo.TestTube;
 import com.java.dc_system.service.ITestTubeService;
-import com.java.dc_system.until.CodeEnum;
+import com.java.dc_system.utils.CodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.java.dc_system.dao.TestTubeDao;
 
 import java.util.List;
 
@@ -19,12 +19,13 @@ import java.util.List;
 public class TestTubeServiceImpl implements ITestTubeService {
     @Autowired
     private TestTubeDao testTubeDao;
+
     @Override
     public int insertTestTube(TestTube testTube) throws BusinessException {
         int num = testTubeDao.insertTestTube(testTube);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有添加试管数据", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -32,9 +33,9 @@ public class TestTubeServiceImpl implements ITestTubeService {
     @Override
     public List<TestTube> selectTestTube(TestTube testTube) throws BusinessException {
         List<TestTube> tubeList = testTubeDao.selectTestTube(testTube);
-        if (tubeList != null){
+        if (tubeList != null) {
             return tubeList;
-        } else{
+        } else {
             throw new BusinessException("没有检索到到试管数据", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -42,9 +43,9 @@ public class TestTubeServiceImpl implements ITestTubeService {
     @Override
     public int updateTestTube(TestTube testTube) throws BusinessException {
         int num = testTubeDao.updateTestTube(testTube);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有更新试管数据", CodeEnum.BUSINESS_ERROR);
         }
     }
@@ -52,9 +53,9 @@ public class TestTubeServiceImpl implements ITestTubeService {
     @Override
     public int checkTestTube(Integer boxId) throws BusinessException {
         int num = testTubeDao.checkTestTube(boxId);
-        if (num != 0){
+        if (num != 0) {
             return num;
-        } else{
+        } else {
             throw new BusinessException("没有检索到试管数量", CodeEnum.BUSINESS_ERROR);
         }
     }

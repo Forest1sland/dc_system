@@ -38,7 +38,7 @@ public class CollectorController {
                 return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, false);
             }
         }else {
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "您已经注册", collector.size(), false);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "该身份证或手机号已被注册", collector.size(), false);
         }
     }
     //检测人员登录

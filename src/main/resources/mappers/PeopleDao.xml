@@ -3,14 +3,17 @@
 <mapper namespace="com.java.dc_system.dao.PeopleDao">
     <!--通过Id获取被检测人员信息-->
     <select id="getPeople" resultType="People" parameterType="People">
-        select * from people
+        select *
+        from people
         <where>
             <trim suffixOverrides="and|or">
-                <if test="tel != null and tel != '' ">
-                    tel = #{tel} or
+                <if test="tel != null and tel != ''">
+                    tel = #{tel}
+                       or
                 </if>
-                <if test="idCard != null and idCard != '' ">
-                    idCard = #{idCard} or
+                <if test="idCard != null and idCard != ''">
+                    idCard = #{idCard}
+                       or
                 </if>
                 <if test="peopleId != null">
                     peopleId = #{peopleId}
@@ -43,8 +46,8 @@
         from people
         where peopleId = #{peopleId}
     </delete>
-    <!--检测人员注册-->
-    <insert id="registerPeople" parameterType="People">
+    <!--被检测人员注册-->
+    <insert id="registerPeople" parameterType="People" useGeneratedKeys="true" keyProperty="peopleId">
         insert into people
         values (null, #{name}, #{idCardType},
                 #{idCard}, #{tel}, #{createTime})
