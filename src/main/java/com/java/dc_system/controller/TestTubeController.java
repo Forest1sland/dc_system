@@ -64,7 +64,6 @@ public class TestTubeController {
         }
 
     }
-
     //删除试管数据
     @PostMapping("/deleteTestTube.do")
     public ResultModel<Integer> deleteTestTube(@RequestBody TestTube model) throws BusinessException {
