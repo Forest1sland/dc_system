@@ -32,7 +32,7 @@ public class SampleServiceImpl implements ISampleService {
     }
 
     @Override
-    public int insertSample(Sample sample) throws BusinessException {
+    public Integer insertSample(Sample sample) throws BusinessException {
         int num = sampleDao.insertSample(sample);
         if (num != 0) {
             return num;
@@ -65,5 +65,15 @@ public class SampleServiceImpl implements ISampleService {
     @Override
     public Integer deleteOneByPeopleId(Integer peopleId) {
         return sampleDao.deleteOneByPeopleId(peopleId);
+    }
+
+    @Override
+    public Integer deleteSample(Sample sample) throws BusinessException {
+        int num = sampleDao.deleteSample(sample);
+        if (num != 0) {
+            return num;
+        } else {
+            throw new BusinessException("没有删除样本数据", CodeEnum.BUSINESS_ERROR);
+        }
     }
 }

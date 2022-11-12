@@ -5,13 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author Forest1sLand_
+ * @Author: zjt
+ * @Date: 2022-11-12 12:38
+ * @Description:
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Point {
-    private Integer pointid;
-
-    private String pointname;
+    //监测点Id
+    private Integer pointId;
+    //检测地点
+    private String pointName;
 }

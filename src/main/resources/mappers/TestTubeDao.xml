@@ -125,4 +125,8 @@
     <select id="checkTestTube" resultType="java.lang.Integer">
         select count(*) from testtube where boxId = #{boxId}
     </select>
+    <!--删除试管信息-->
+    <delete id="deleteTestTube">
+        delete from testtube where testTubeId = #{testTubeId}
+    </delete>
 </mapper>

@@ -15,10 +15,16 @@ import java.util.List;
 public interface TestTubeDao {
     //添加试管信息(开管)
     int insertTestTube(TestTube testTube);
+
     //查询该箱子下试管信息
     List<TestTube> selectTestTube(TestTube testTube);
+
     //更新试管信息(封管)
     int updateTestTube(TestTube testTube);
+
     //试管数量校验
-    int checkTestTube(@Param("boxId")Integer boxId);
+    int checkTestTube(@Param("boxId") Integer boxId);
+
+    //删除试管信息
+    int deleteTestTube(@Param("testTubeId") Integer testTubeId);
 }

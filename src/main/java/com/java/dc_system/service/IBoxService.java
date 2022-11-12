@@ -14,8 +14,13 @@ import java.util.List;
 public interface IBoxService {
     //转运箱开箱操作
     int insertBox(Box box) throws BusinessException;
+
     //封箱
     int updateBox(Box box) throws BusinessException;
+
     //查询转运箱信息
     List<Box> getBox(Box box) throws BusinessException;
+
+    //删除转运箱信息
+    int deleteBox(Box box) throws BusinessException;
 }

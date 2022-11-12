@@ -16,7 +16,7 @@ public interface ISampleService {
     List<Sample> selectSample(Sample sample) throws BusinessException;
 
     //添加样本数据
-    int insertSample(Sample sample) throws BusinessException;
+    Integer insertSample(Sample sample) throws BusinessException;
 
     //试管人数校验
     Integer checkSampleTestTubeId(@Param("testTubeId") Integer testTube) throws BusinessException;
@@ -25,4 +25,7 @@ public interface ISampleService {
     List<Sample> selectInfoUnderSample(@Param("testTubeId") Integer testTubeId) throws BusinessException;
 
     Integer deleteOneByPeopleId(@Param("peopleId") Integer peopleId);
+
+    //删除样本信息
+    Integer deleteSample(Sample sample) throws BusinessException;
 }

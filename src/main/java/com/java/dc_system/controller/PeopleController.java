@@ -5,6 +5,7 @@ import com.java.dc_system.pojo.People;
 import com.java.dc_system.pojo.vo.ResultModel;
 import com.java.dc_system.service.IPeopleService;
 import com.java.dc_system.utils.CodeEnum;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,8 +19,9 @@ import java.util.List;
  * @Date: 2022-11-04 22:52
  * @Description:
  */
-@RestController
+@Api(tags = "被检测人员API")
 @RequestMapping("/people")
+@RestController
 public class PeopleController {
     @Autowired
     private IPeopleService peopleService;
