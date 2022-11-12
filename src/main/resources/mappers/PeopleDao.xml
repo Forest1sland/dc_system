@@ -60,10 +60,16 @@
           and tel = #{tel}
     </select>
     <!--被检测人员的注册验证-->
-    <select id="checkPeople" resultType="People">
+    <select id="checkPeopleByIdCardOrTel" resultType="People">
         select *
         from people
         where idCard = #{idCard}
            or tel = #{tel}
+    </select>
+    <select id="checkPeopleByIdCardAndTel" resultType="People">
+        select *
+        from people
+        where idCard = #{idCard}
+          and tel = #{tel}
     </select>
 </mapper>

@@ -34,16 +34,20 @@ public class PeopleController {
     //被检测人员注册
     @PostMapping("/registerPeople.do")
     public ResultModel<Object> registerPeople(@RequestBody People model) throws BusinessException {
-        List<People> people = peopleService.checkPeople(model.getIdCard(), model.getTel());
-        if (people.size() == 0) {
-            int num = peopleService.registerPeople(model);
-            if (num != 0) {
-                return new ResultModel<>(CodeEnum.SUCCESS, "注册成功", model.getPeopleId(), true);
-            } else {
-                return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", num, false);
+        List<People> exist = peopleService.checkPeopleByIdCardAndTel(model.getIdCard(), model.getTel());
+        List<People> diffIdCardTelExist = peopleService.checkPeopleByIdCardOrTel(model.getIdCard(), model.getTel());
+        if (exist.size() == 0) {
+            if (diffIdCardTelExist.size() == 0) {
+                int num = peopleService.registerPeople(model);
+                if (num != 0) {
+                    return new ResultModel<>(CodeEnum.SUCCESS, "登记成功", model.getPeopleId(), true);
+                } else {
+                    return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "登记失败", num, false);
+                }
             }
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "登记失败", "用户信息不一致", false);
         } else {
-            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "注册失败", "您已经已注册", false);
+            return new ResultModel<>(CodeEnum.BUSINESS_ERROR, "登记失败", "您已经已注册", false);
         }
     }
 

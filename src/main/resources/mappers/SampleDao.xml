@@ -74,7 +74,7 @@
                 #{testTubeId},
             </if>
             <if test="collectTime != null">
-                #{collectTime},
+                now(),
             </if>
         </trim>
     </sql>
@@ -105,7 +105,7 @@
                        or
                 </if>
                 <if test="collectTime != null">
-                    collectTime = NOW()
+                    collectTime = #{collectTime}
                 </if>
             </trim>
         </where>

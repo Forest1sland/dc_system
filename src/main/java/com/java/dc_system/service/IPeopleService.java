@@ -25,5 +25,7 @@ public interface IPeopleService {
     //被检测人员登录
     People loginPeople(@Param("idCard")String idCard,@Param("tel")String tel) throws BusinessException;
     //校验被检测人员的注册信息
-    List<People> checkPeople(@Param("idCard")String idCard,@Param("tel")String tel) throws BusinessException;
+    List<People> checkPeopleByIdCardOrTel(@Param("idCard")String idCard,@Param("tel")String tel) throws BusinessException;
+    List<People> checkPeopleByIdCardAndTel(@Param("idCard")String idCard,@Param("tel")String tel) throws BusinessException;
+
 }

@@ -15,14 +15,23 @@ import java.util.List;
 public interface PeopleDao {
     //查询全部被检测人员
     List<People> getPeople(People model);
+
     //通过Id修改被检测人员信息
     int updatePeople(People model);
+
     //通过Id删除被检测人员信息
-    int deletePeople(@Param("peopleId")Integer peopleId);
+    int deletePeople(@Param("peopleId") Integer peopleId);
+
     //被检测人员注册
     int registerPeople(People model);
+
     //被检测人员登录
-    People loginPeople(@Param("idCard")String idCard,@Param("tel")String tel);
+    People loginPeople(@Param("idCard") String idCard, @Param("tel") String tel);
+
     //校验被检测人员的注册信息
-    List<People> checkPeople(@Param("idCard")String idCard,@Param("tel")String tel);
+    List<People> checkPeopleByIdCardOrTel(@Param("idCard") String idCard, @Param("tel") String tel);
+
+    List<People> checkPeopleByIdCardAndTel(@Param("idCard") String idCard, @Param("tel") String tel);
+
+
 }
