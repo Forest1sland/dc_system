@@ -37,8 +37,8 @@ public class PeopleController {
     @PostMapping("/registerPeople.do")
     public ResultModel<Object> registerPeople(@RequestBody People model) throws BusinessException {
         List<People> exist = peopleService.checkPeopleByIdCardAndTel(model.getIdCard(), model.getTel());
-        List<People> diffIdCardTelExist = peopleService.checkPeopleByIdCardOrTel(model.getIdCard(), model.getTel());
         if (exist.size() == 0) {
+            List<People> diffIdCardTelExist = peopleService.checkPeopleByIdCardOrTel(model.getIdCard(), model.getTel());
             if (diffIdCardTelExist.size() == 0) {
                 int num = peopleService.registerPeople(model);
                 if (num != 0) {
