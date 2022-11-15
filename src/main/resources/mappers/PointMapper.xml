@@ -4,8 +4,8 @@
     <resultMap id="BaseResultMap" type="com.java.dc_system.pojo.Point">
         <!--@mbg.generated-->
         <!--@Table point-->
-        <id column="pointId" jdbcType="INTEGER" property="pointid"/>
-        <result column="pointName" jdbcType="VARCHAR" property="pointname"/>
+        <id column="pointId" jdbcType="INTEGER" property="pointId"/>
+        <result column="pointName" jdbcType="VARCHAR" property="pointName"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
